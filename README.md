@@ -1,0 +1,1 @@
+This is the full Givegoods application code. I am making this public for my HUGE tech school application.
