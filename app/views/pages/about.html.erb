@@ -1,0 +1,194 @@
+<style type="text/css">
+body {background-color: #F6F3EE;}
+
+.numbers {
+font-size: 100px;
+letter-spacing: -2px;
+color: #444;
+font-weight: bold;
+}
+
+#checkout-sidebar {
+ width: 300px;
+}
+
+#sidebar-inner {
+ padding: 10px;
+ margin: 10px;
+ background-color: #FEFEFE;
+ width: auto;
+ min-height: 100px;
+}
+
+p {
+font-size: 12px;
+}
+
+.larger {
+font-size: 36px;
+letter-spacing: -1px;
+line-height: 36px;
+}
+
+hr {
+margin-top: 40px;
+margin-bottom: 10px;
+}
+
+h4 {
+margin:0px;
+color: #666666;
+}
+
+</style>
+
+<div id="main">
+  <div id="loginpage">
+
+<div id="checkout-sidebar">
+  <div align="center" id="sidebar-inner">
+   <span class="numbers" style="color: #F97E68">$0</span>
+   <p>What merchants are charged to use Givegoods. <br><%= link_to "Join Now.", page_path('join')  %>
+</p>
+  </div>
+
+  <div align="center" id="sidebar-inner">
+   <span class="numbers" style="color: #EB5775">&hearts;</span>
+   <p>What we feel for Alameda. Our offices are here. We live here. We love it here.<p>
+  </div>
+
+  <div align="center" id="sidebar-inner">
+   <span class="numbers" style="color: #0098B1">4</span>
+   <p>Number of Employees.</p>
+  </div>
+  <div align="center" id="sidebar-inner">
+   <span class="numbers" style="color: #99cc99">+25%</span>
+   <p>Average additional dollars kept in local<br>communities, compared with fees from daily deal companies.</p>
+  </div>
+  <div align="center" id="sidebar-inner">
+   <span class="numbers" style="color: #cccc99">1</span>
+   <p>Number of pending process patents.<br>We've got some new ideas.</p>
+  </div>
+</div>
+
+<div style="float:left; width: 500px;">
+
+<br>
+
+<h3 class="larger">About</h3>
+<br>
+<iframe src="http://player.vimeo.com/video/43282451" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+<hr>
+
+<h3>How it Works</h3>
+<p>What if you could give $20 to a local charity and save $40 off your next dinner? Why wouldn't you give again and again?<p>
+
+<p>Now, you can support local charities by doing the same shopping and dining you already do. Everytime you shop or dine, you can support charities and save money at the same time.</p>
+
+<p>Consumers get savings. Merchants connect to loyal customers for no cost. Charities offer great incentives to encourage much needed ongoing funding. Everybody wins. We'd love you to <%= link_to "join us.", page_path('join')  %><p> To participate, choose one or more <a href="<%= merchants_path %>">rewards</a>, give to your designated charity and then print out your discount certificates and save at the merchant. 
+
+<hr>
+
+<div style="float:left">
+    <h3 id="contact">Contact Us</h3>
+    <p>
+      email: <a href="mailto:info@givegoods.org">info@givegoods.org</a>
+      <br>
+      address: 1516 Oak Street #102, <br>Alameda, CA 94501
+      <br>
+    </p>
+</div>
+
+<div style="float:right">
+<iframe width="300" height="100" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?oe=utf-8&amp;client=firefox-a&amp;q=1516+Oak+St.+%23102+Alameda,+CA&amp;ie=UTF8&amp;hq=&amp;hnear=1516+Oak+St,+Alameda,+California+94501&amp;gl=us&amp;t=m&amp;ll=37.766644,-122.242813&amp;spn=0.020355,0.051498&amp;z=13&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps?oe=utf-8&amp;client=firefox-a&amp;q=1516+Oak+St.+%23102+Alameda,+CA&amp;ie=UTF8&amp;hq=&amp;hnear=1516+Oak+St,+Alameda,+California+94501&amp;gl=us&amp;t=m&amp;ll=37.766644,-122.242813&amp;spn=0.020355,0.051498&amp;z=13&amp;iwloc=A&amp;source=embed" style="color:#0000FF;text-align:left"></a></small>
+</div>
+
+<div class="clear"></div>
+
+<hr>
+
+<div style="float:left">
+    <h3 id="team">Our Team</h3>
+    <h4><a href="mailto:christopher@givegoods.org">Christopher Grant Ward</a></h4>
+    <p style="margin:0px">Founder, Product</p>
+    <p>
+    <h4><a href="mailto:jim@givegoods.org">Jim Kaufman</a></h4>
+    <p style="margin:0px">Co-Founder, Operations</p>
+    <p>
+    <h4><a href="mailto:charles@givegoods.org">Charles Guenther</a></h4>
+    <p style="margin:0px">Director, Development</p>
+    <p>
+    <h4><a href="mailto:martha@givegoods.org">Martha Lane-Matheson</a></h4>
+    <p style="margin:0px">Marketing Coordinator</p>    
+</div>
+
+<div style="float:right">
+    <h3>Our Partners</h3>
+    <p>
+    <a href="http://subtxt.us/">SUBTXT</a>, Design and Innovation<br>
+    <a href="http://ruby.bvision.com/">BVision</a>, Development Support<br>
+    <a href="http://www.holzheid.com/">Christiane Holzheid</a>, Illustrator<br>
+    <a href="http://www.linkedin.com/pub/kathy-moehring/6/772/85">Kathy Moehring</a>, BKKM Consultants<br>
+    <a href="http://www.arc.org/content/view/592/">Noel Rabinowitz</a>, Strategic Consultant<br>
+    <a href="http://www.broadwaymanagementbayarea.net/">Ed Hirshberg, Broadway Management Co.</a><br>
+    <a href="https://www.facebook.com/photo.php?fbid=10150843978715822&set=a.10150843976915822.429285.580265821&type=1&theater">Pixel</a>, Security</a><br>
+    <a href="mailto:peter@givegoods.org">Peter Elliot</a>, Contracts<br>
+    </p>
+</div>
+
+<div class="clear"></div>
+
+<hr>
+
+<div>
+    <h3 id="press">Press</h3>
+    <p>FOR IMMEDIATE RELEASE:</p>
+    <h4>Upstart Community Rewards App Makes Finals in National Design Innovation Contest</h4>
+
+    <p>ALAMEDA, CA (September 10, 2012) - Givegoods, an Alameda-based web startup was chosen as a national finalist
+    in FastCompany's 2012 Innovation By Design Awards. From over 1700 applicants, only 56 were selected as finalists for the prestigious award.
+    </p>
+
+    <p>
+    FastCompany's inaugural Innovation By Design Awards aim to celebrate the year's best design ideas and business innovations from around the country.
+    Finalists will be published in a feature package in Fast Company's October 2012 design issue, and winners will be published and announced shortly thereafter.
+    Fast Company reaches 2.9 million readers every issue, and serves over 6 million website pageviews monthly.
+    </p>
+
+    <p>
+   "We're incredibly excited about this," said Givegoods CEO Christopher Ward. "We believe product design is a huge part of why people will use our product, or any product that requires new behaviors." Givegoods partnered with SUBTXT, a leading product design agency that Ward also owns and co-manages. "This contest is about innovation in design, so I couldn't really ask for a better way for our hard work to get recognized." 
+    </p>
+
+    <p>
+Givegoods creates a marketplace where any local community to help raise money for charities, help businesses get new customers and give rewards to people when they donate. "It's a great way for any small community to do good," said Ward. "We succeed when every town can take advantage of this win-win-win scenario."
+    </p>
+
+    <p>
+<h4>About Givegoods</h4>
+<p>Givegoods is a technology leader building a marketplace for charitable rewards. By enabling charities to offer rewards from local businesses in exchange for donations, Givegoods provides value and opportunity to local communities. The team is comprised of entrepreneurs who have added strategic value to companies including Reverbnation, Oliver Wyman, Topspin Media, SayMedia, goBalto, LookSmart and Dynamic Signal. Givegoods is self-funded, located in Alameda, CA and currently seeking angel investment. 
+</p>
+
+<h4>About <a href="http://subtxt.us">SUBTXT</a></h4>
+<p>SUBTXT is an award-winning design agency focused on startups and web technology products. Clients and companies include Oakley, Nike Women, SayMedia, Quotify, CHNL, MySpace, Givegoods, Anyweargirl, The Decemberists, The Doors, Wells Fargo, ISIS, Visa, Disney, Intel, Sony, Charles Schwab, Bank of America. SUBTXT is located in Alameda, CA.
+</p>
+
+<h4>About Fast Company</h4>
+<p>
+Fast Company is the world's leading progressive business-media brand, with a unique editorial focus on innovation in technology, ethonomics (ethical economics), leadership, and design. Written for, by, and about the most progressive business leaders. Editor Robert Safian was named AdWeek's Editor of the Year in 2009. Under the leadership of publisher Christine Osekoski, Fast Company has made AdWeek's Hot List for three consecutive years, and FastCompany.com executive editor Noah Robischon has tripled traffic and revenue year over year. Fast Company is owned by Joe Mansueto, founder, chairman, and CEO of Morningstar, a leading provider of independent investment research.
+</p>
+<br>
+ ###
+
+     
+     
+    </p>
+</div>
+
+</div>
+
+<div class="clear"></div>
+
+  </div>
+</div>
+

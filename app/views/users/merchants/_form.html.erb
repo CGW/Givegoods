@@ -1,0 +1,62 @@
+
+<%= form_for merchant, :url => user_merchant_path, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= error_group_for(f) do %>
+    <strong>Uh oh!</strong> Looks like there was a problem creating your merchant:
+  <% end %>
+
+
+  <fieldset>
+    <%= control_group_for(f, :name) do %>
+      <% if merchant.persisted? %>
+        <span class="input-large uneditable-input"><%= merchant.name %></span>
+      <% else %>
+        <%= f.text_field :name, :tabindex => autotabindex %>
+      <% end %>
+    <% end %>
+
+    <%= control_group_for(f, :website_url) do %>
+      <%= f.text_field :website_url, :tabindex => autotabindex %>
+    <% end %>
+
+    <% if merchant.persisted? %>
+      <%= control_group_for(f, :description) do %> 
+        <%= f.text_area :description, :rows => 3, :class => 'input-block-level', :tabindex => autotabindex %>
+      <% end %>
+
+      <br />
+
+      <%= control_group_for(f, :picture) do %>
+        <%= f.file_field :picture %>
+        <%# So carrierwave remembers uploaded images if validations fail %>
+        <%= f.hidden_field :picture_cache %>
+      <% end %>
+    <% else %>
+      <%= f.fields_for(:address) do |address| %>
+        <%= control_group_for(address, :postal_code) do %> 
+          <%= address.text_field :postal_code, :tabindex => autotabindex %>
+        <% end %>
+
+        <%= address.hidden_field :country_code, :value => 'US' %>
+      <% end %>
+    <% end %>
+  </fieldset>
+
+  <% if merchant.persisted? %>
+    <fieldset>
+      <legend>Contact Information</legend>
+
+      <%= f.fields_for(:address) do |address| %>
+        <%= render :partial => 'users/addresses/fields', :locals => { :builder => address } %>
+      <% end %>
+    </fieldset>
+    <% end %>
+
+  <br /> 
+
+  <div class="control-group">
+    <div class="controls">
+      <% submit_text = merchant.persisted? ? 'Update merchant' : 'Create merchant' %>
+      <%= f.submit submit_text, :class => 'btn btn-primary', :tabindex => autotabindex %>
+    </div>
+  </div>
+<% end %>

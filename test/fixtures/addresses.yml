@@ -1,0 +1,98 @@
+save_the_redwoods_leage_address:
+  addressable_id: 1
+  addressable_type: Charity
+  street: 114 Sansome Street, Suite 1200
+  city: San Francisco
+  postal_code: '94104'
+  province_code: CA
+  country_code: US
+
+california_state_parks_foundation_address:
+  addressable_id: 2
+  addressable_type: Charity
+  street: 50 Francisco Street, Suite 110
+  city: San Francisco
+  postal_code: '94133'
+  province_code: CA
+  country_code: US
+
+california_police_youth_foundation_address:
+  addressable_id: 3
+  addressable_type: Charity
+  street: '7401 Galilee Rd. Spc. #350'
+  city: Roseville
+  postal_code: '95678'
+  province_code: CA
+  country_code: US
+
+alameda_food_bank_address:
+  addressable_id: 4
+  addressable_type: Charity
+  street: 1900 Thau Way
+  city: Alameda
+  postal_code: '94501'
+  province_code: CA
+  country_code: US
+
+boys_and_girls_of_alameda_address:
+  addressable_id: <%= ActiveRecord::Fixtures.identify :boys_and_girls_of_alameda %>
+  addressable_type: Charity
+  street: 1900 3rd St
+  city: Alameda
+  postal_code: '94501'
+  province_code: CA
+  country_code: US
+
+books_inc_address:
+  addressable_id: 1
+  addressable_type: Merchant
+  street: 1344 Park St
+  city: Alameda
+  postal_code: '94501'
+  province_code: CA
+  country_code: US
+
+sumbody_address:
+  addressable_id: 2
+  addressable_type: Merchant
+  street: 1350 Park St
+  city: Alameda
+  postal_code: '94501'
+  province_code: CA
+  country_code: US
+
+burma_superstar_address:
+  addressable_id: <%= ActiveRecord::Fixtures.identify :burma_superstar %>
+  addressable_type: Merchant
+  street: 4721 Telegraph Av
+  city: Oakland
+  postal_code: '94609'
+  province_code: CA
+  country_code: US
+
+flowers_address:
+  addressable_id: 4
+  addressable_type: Merchant
+  street: 2305 Santa Clara Av
+  city: Oakland
+  postal_code: '94501'
+  province_code: CA
+  country_code: US
+
+blue_dot_cafe_address:
+  addressable_id: <%= ActiveRecord::Fixtures.identify :blue_dot_cafe %>
+  addressable_type: Merchant
+  street: 1910 Encinal Av
+  city: Alameda
+  postal_code: '94501'
+  province_code: CA
+  country_code: US
+
+powerplant_address:
+  addressable_id: 6
+  addressable_type: Merchant
+  street: 100 Powerplant Dr
+  city: Alameda
+  postal_code: '94502'
+  province_code: CA
+  country_code: US

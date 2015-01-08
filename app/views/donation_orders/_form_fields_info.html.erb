@@ -1,0 +1,66 @@
+<div class="clearfix">
+  <div class="form-split pull-left">
+    <fieldset>
+      <%= form.fields_for(:customer, donation_order.customer) do |customer_form| %>
+        <%= control_group_for(customer_form, :first_name, :label => "First Name") do %>
+          <%= customer_form.text_field :first_name, :class => 'input-block-level', :tabindex => autotabindex %>
+        <% end %>
+
+        <%= control_group_for(customer_form, :last_name, :label => "Last Name") do %>
+          <%= customer_form.text_field :last_name, :class => 'input-block-level', :tabindex => autotabindex %>
+        <% end %>
+
+        <%= control_group_for(customer_form, :email, :label => "Email Address") do %>
+          <%= customer_form.text_field :email, :class => 'input-block-level', :tabindex => autotabindex %>
+        <% end %>
+
+        <%= customer_form.fields_for(:billing_address, :include_id => false) do |billing| %>
+          <%= control_group_for(billing, :street, :label => "Street Address") do %>
+            <%= billing.text_field :street, :class => 'input-block-level', :tabindex => autotabindex %>
+          <% end %>
+
+          <%= control_group_for(billing, :city, :label => "City") do %>
+            <%= billing.text_field :city, :class => 'input-block-level', :tabindex => autotabindex %>
+          <% end %>
+
+          <%= control_group_for(billing, :province_code) do %>
+            <%= billing.select :province_code, Region.all.collect {|r| [r.name, r.code]}, { :include_blank => true }, :class => 'input-large', :tabindex => autotabindex %>
+          <% end %>
+
+          <%= billing.hidden_field :country_code, :value => 'US' %>
+        <% end %>
+      <% end %>
+    </fieldset>
+  </div>
+
+  <div class="form-split pull-right">
+    <fieldset class="billing-info">
+      <%= form.fields_for(:credit_card, donation_order.credit_card) do |cc_form| %>
+        <%= control_group_for(cc_form, :number, :label => "CC Number") do %>
+          <%= cc_form.text_field :number, :class => 'input-block-level', :tabindex => autotabindex %>
+        <% end %>
+
+        <%= control_group_for(cc_form, :type, :label => "CC Type") do %>
+          <%= cc_form.select :type, MerchantSidekick::default_gateway.supported_cardtypes.map {|t| ["#{t}".titleize, t]}, {}, :class => 'span2', :tabindex => autotabindex %>
+        <% end %>
+
+        <%= control_group_for(cc_form, :year, :label => "CC Expiration") do %>
+          <%= cc_form.select :month, (1..12).collect{ |n| ["#{n} - #{I18n.t('date.month_names')[n]}", n] }, {}, :class => 'span2', :tabindex => autotabindex %>
+          <%= cc_form.select :year, Date.today.year..Date.today.year+8, {}, :class => 'input-small', :tabindex => autotabindex %>
+        <% end %>
+
+        <%= control_group_for(cc_form, :verification_value, :label => "CVC") do %>
+          <%= cc_form.text_field :verification_value, :class => 'input-mini', :tabindex => autotabindex %>
+        <% end %>
+      <% end %>
+
+      <%= form.fields_for(:customer, donation_order.customer) do |cf| %>
+        <%= cf.fields_for(:billing_address_attributes, donation_order.customer.billing_address) do |billing| %>
+          <%= control_group_for(billing, :postal_code, :label => "Billing Zip Code") do %>
+            <%= billing.text_field :postal_code, :class => 'input-mini', :tabindex => autotabindex %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </fieldset>
+  </div>
+</div>

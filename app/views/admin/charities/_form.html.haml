@@ -1,0 +1,123 @@
+= semantic_form_for [:admin, @charity], :html => { :multipart => true } do |f|
+  = f.inputs "Charity Details" do
+    - if f.object.user_id.blank?
+      = f.input :user, :as => :select, :collection => Hash[User.active.charity.map {|u| ["#{u.name} (#{u.email})", u.id]}]
+    = f.input :name
+    = f.input :ein, :as => :string
+    = f.input :website_url, :as => :string
+    = f.input :description, :as => :string
+    = f.input :email, :as => :string
+    = f.input :picture, :as => :file
+    = f.input :remote_picture_url, :label => "or Remote Picture URL"
+    = f.input :campaign_bundle_tagline, :as => :string
+    = f.input :lat
+    = f.input :lng
+
+  = f.semantic_fields_for :address, f.object.address || f.object.build_address do |a|
+    = a.inputs "Address" do
+      = a.input :phone
+      = a.input :street, :input_html => {:class => 'autogrow', :rows => 2, :cols => 20}
+      = a.input :city
+      = a.input :postal_code
+      = a.input :province_code, :collection => Region.all.collect {|r| [r.code, r.code]}
+      = a.input :country_code, :as => :hidden, :value => "US"
+
+  - unless f.object.new_record?
+
+    = f.inputs "Featured Merchants" do
+      %li.check_boxes
+        %fieldset.choices
+          %legend.label
+            %label
+              Merchants
+          %ol#featuring_list.choices-group
+            = f.fields_for :featurings do |fb|
+              %li.choice
+                %label
+                  = fb.hidden_field :id,          :class => 'featuring_id'
+                  = fb.hidden_field :merchant_id, :class => 'featuring_merchant'
+                  = fb.hidden_field :priority,    :class => 'featuring_priority'
+                  = fb.hidden_field :_destroy,    :class => 'featuring_destroy'
+                  [ #{link_to "×", "#", class: "featuring_remove_link"} ]
+                  #{fb.object.merchant.try(:name)} (priority: #{fb.object.priority})
+      %li.string
+        %label
+          &nbsp;
+        = hidden_field_tag :new_featured_merchant_id
+        = autocomplete_field_tag 'new_featured_merchant_name', '', autocomplete_merchant_name_admin_charities_path, :size => 50, :style => 'width: 20%', :id_element => '#new_featured_merchant_id'
+        = text_field_tag 'new_featured_merchant_priority', '0', :style => 'width: 30px'
+        = button_tag 'Add', id: 'add_feature_merchant'
+
+    -#= f.hidden_field :blocked_merchant_ids
+    = hidden_field_tag 'charity[blocked_merchant_ids][]', ''
+    = f.inputs "Blocked Merchants" do
+      %ol
+        %li
+          #blocked_merchants_list
+            - f.object.blocked_merchants.each do |merchant|
+              .nested-fields
+                %label #{merchant.name}
+                %a{:class => "blocked_merchant_del"} Remove
+                = hidden_field_tag "charity[blocked_merchant_ids][]", "#{merchant.id}", :id => "charity[blocked_merchant_ids_#{merchant.id}]"
+          %fieldset
+            %label Add new Merchant by name:
+            %div
+              = hidden_field_tag :new_blocked_merchant_id
+              = autocomplete_field_tag 'new_blocked_merchant_name', '', autocomplete_merchant_name_admin_charities_path, :size => 50, :style => 'width: 20%', :id_element => '#new_blocked_merchant_id'
+              = button_tag 'Add', id: 'add_merchant_button', class: 'nosubmit'
+
+  = f.actions
+
+.to_clone{:style => 'display:none'}
+  .nested-fields
+    %label MERCHANT_NAME
+    %a{:class => "blocked_merchant_del"} Remove
+    = hidden_field_tag "charity[blocked_merchant_ids][]", "MERCHANT_ID"
+
+#featuring_to_clone{:style => 'display:none'}
+  %li.choice
+    %label
+      = hidden_field_tag :id,          '', :class => 'featuring_id',       :id => nil
+      = hidden_field_tag :merchant_id, '', :class => 'featuring_merchant', :id => nil
+      = hidden_field_tag :priority,    '', :class => 'featuring_priority', :id => nil
+      = hidden_field_tag :_destroy,    '', :class => 'featuring_destroy',  :id => nil
+      [ #{link_to "×", "#", class: "featuring_remove_link"} ]
+
+:javascript
+  $(function() {
+    $('.nosubmit').click(function(e){e.preventDefault();});
+
+    $('a.blocked_merchant_del').live("click", function(){
+      $(this).closest('.nested-fields').remove();
+      return false;
+    });
+
+    $('button#add_merchant_button').click(function(){
+      add_merchant_block('#blocked_merchants_list', '.to_clone');
+      return false;
+    });
+
+    $('.blocked_merchant_del').live("click", function(){$(this).closest('.nested-fields').remove();});
+  });
+
+  function add_merchant_block(container, content) {
+    var merchant_id = $('#new_blocked_merchant_id')[0];
+    var merchant_name = $('#new_blocked_merchant_name')[0];
+
+    if( merchant_id.value != ''){
+      var found = false;
+      $('#blocked_merchants_list input').each(function(index) {
+        if(this.value == merchant_id.value) found = true;
+      });
+      if(found) return false;
+
+      var idx = $('#blocked_merchants_list .nested-fields').length;
+      var new_content = $(content).html()
+        .replace('MERCHANT_NAME', merchant_name.value)
+        .replace('MERCHANT_ID', merchant_id.value);
+      $(container).append(new_content);
+      merchant_id.value = '';
+      merchant_name.value = '';
+    }
+  }
+

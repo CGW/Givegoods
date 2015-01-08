@@ -1,0 +1,12 @@
+<%= render :file => "merchants/index" %>
+
+<% content_for :javascript do %>
+  <script type='text/javascript'>
+    $(function() {
+      if($("#<%= dom_id(@merchant) %>").length > 0) {
+        $.scrollTo("#<%= dom_id(@merchant) %>", 100);
+      }
+      <%= render partial: "shared/grid/new", formats: [:js] %>
+    });
+  </script>
+<% end %>

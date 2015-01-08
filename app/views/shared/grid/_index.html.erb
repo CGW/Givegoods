@@ -1,0 +1,26 @@
+<div id="cart">
+  <div>
+    <h2>Select more rewards or give now.</h2>
+    <hr />
+  </div>
+
+  <div id="cart_charities">
+  </div>
+  <div class="cart-submit clearfix">
+    <%= link_to "Give Now", "/orders/new", :class => "button" %>
+    <h1 id="cart_total" class="pull-right">$0</h1>
+  </div>
+</div>
+
+<div id="main" class="clearfix">
+  <div id="grid">
+    <%= yield :grid_header %>
+
+    <div id="grid-left">
+      <%= yield :grid_left %>
+    </div>
+    <div id="grid-right" class="clearfix">
+      <%= yield :grid_right %>
+    </div>
+  </div>
+</div>

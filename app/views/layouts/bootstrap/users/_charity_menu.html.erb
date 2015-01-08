@@ -1,0 +1,25 @@
+<% charity ||= current_user.charity %>
+
+<%= render_if_present(!charity) do %>
+  <%= image_tag Charity.new.picture.grid.url, :class => 'img-rounded' %>
+ 
+  <br />
+  <br />
+<% end %>
+
+<%= render_if_present(charity) do %>
+  <%= image_tag charity.picture.grid.url, :class => 'img-rounded' %>
+  <h5 align="center"><%= charity.name %></h5>
+<% end %>
+
+<div class="well user-settings-nav-panel">
+  <ul class="nav nav-list">
+    <li><%= link_to 'Charity profile', edit_user_charity_path %></li>
+
+    <% if (charity && charity.campaign && (charity.active? || user_policy.active?)) %>
+      <li><%= link_to 'Donation page', edit_user_campaign_path %></li>
+    <% end %>
+
+    <li><%= link_to 'Account settings', edit_user_registration_path %></li>
+  </ul>
+</div>

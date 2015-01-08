@@ -1,0 +1,21 @@
+<div id="grid-controls" class="grid-panel clearfix">
+  <h4>How do I give?</h4>
+
+  <ol>
+    <li>Select a reward</li>
+    <li>Choose a charity to receive the donation</li>
+    <li>Receive the reward</li>
+  </ol>
+
+  <%= form_tag search_merchants_path, :method => :get, :class => "geosearch" do %>
+    <div class="control-group">
+    <%= label_tag :place, "Search by location:" %><br />
+    <%= text_field_tag :place, params[:place], :class => "textInput" %>
+  </div>
+  <div class="control-group">
+    <%= label_tag :name, "Search by name:" %><br />
+    <%= text_field_tag :name, params[:name], :class => "textInput" %>
+  </div>
+  <%= submit_tag "Submit", :id => "button" %>
+<% end %>
+</div>

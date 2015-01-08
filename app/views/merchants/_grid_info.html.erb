@@ -1,0 +1,29 @@
+<div id="grid-info" class="grid-panel">
+  <div class="grid-info-image">
+    <%= image_tag merchant.picture.grid_info %>
+  </div>
+
+  <h4><%= merchant.name %></h4>
+
+  <%= render_if_present(merchant.description) do %>
+    <hr />
+    <%= simple_format(merchant.description) %>
+  <% end %>
+
+  <% if merchant.address %>
+    <hr />
+    <address>
+      <%= merchant.address.street %><br />
+      <%= "#{merchant.address.city}, #{merchant.address.state_code} #{merchant.address.postal_code}" %>
+      <% if merchant.address.phone %>
+        <br />
+        Phone: <%= merchant.address.phone %>
+      <% end %>
+    </address>
+  <% end %>
+
+  <%= render_if_present(merchant.website_url) do %>
+    <hr />
+    <p>Visit our <%= link_to 'website', merchant.website_url, "data-popup" => true %>.</p>
+  <% end %>
+</div>

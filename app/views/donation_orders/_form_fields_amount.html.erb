@@ -1,0 +1,20 @@
+<div class="form-amount row">
+  <%= form.fields_for(:donation, donation_order.donation) do |donation| %>
+    <%= control_group_for(donation, :amount, :label => '', :class => 'pull-left') do %>
+      <div class="input-prepend span">
+        <span class="add-on">$</span>
+          <%= donation.text_field :amount, :"data-bind" => "value: formattedDonationAmount", :tabindex => autotabindex %>
+      </div>
+    <% end %>
+  <% end %>
+    
+  <span class="span3">
+    <%= form.fields_for(:customer, donation_order.customer) do |customer| %>
+      <%= customer.label :anonymous_donation, :class => 'checkbox' do %>
+        <%= customer.check_box :anonymous_donation, :tabindex => autotabindex %>
+        Contribute anonymously
+        <a rel="tooltip" title="An anonymous donation means the charity knows your donation amount but does not receive your name or any other contact information about you.">[?]</a> 
+      <% end %>
+    <% end %>
+  </span>
+</div>

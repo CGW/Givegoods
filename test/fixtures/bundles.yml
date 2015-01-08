@@ -1,0 +1,13 @@
+boys_and_girls_of_alameda:
+  donation_value_cents: 100
+  charity: boys_and_girls_of_alameda
+  status: active
+  image:
+  tagline: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+
+boys_and_girls_of_alameda_with_no_offers:
+  donation_value_cents: 100
+  charity: boys_and_girls_of_alameda
+  status: active
+  image:
+  tagline: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."

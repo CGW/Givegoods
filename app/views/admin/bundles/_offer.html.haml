@@ -1,0 +1,5 @@
+%li.choice
+  %label
+    = hidden_field_tag "bundle[offer_ids][]", offer.id
+    [ #{link_to "×", "#", class: "offer_id_remove_link"} ]
+    = offer

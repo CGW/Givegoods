@@ -1,0 +1,13 @@
+/*****************************************************************************
+ * This is a SASS manifest file that will include all the sass includes listed
+ * below into:
+ *   /public/assets/application.css
+ ****************************************************************************/
+@import "variables";
+@import "givegoods";
+@import "bootstrap/footer";
+@import "certificates";
+@import "charities";
+@import "homepage";
+@import "utilities";
+@import "jquery-ui";

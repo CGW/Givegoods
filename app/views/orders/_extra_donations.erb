@@ -1,0 +1,12 @@
+<% @donations.each_with_index do |d, i| %>
+  <div class="form-row" style="min-height:0px;" class="additional-donation-amount-form-row">
+    <%= fields_for "[order][donations][#{i}]",d do |don| %>
+      <span class="h3-checkout">
+        <%= don.label :amount, "To #{d.charity.name}:" %>
+      </span>
+      <%= don.hidden_field :charity_id %>
+      $ <%= don.text_field :amount, :class => "textInput donation-amount", :size => 8, :autocomplete => "off" %>
+    <% end %>
+  </div>
+<% end %>
+<hr />

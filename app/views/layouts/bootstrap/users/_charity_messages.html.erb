@@ -1,0 +1,7 @@
+<% charity ||= current_user.charity %>
+
+<% if charity && user_policy.active? && !charity.active? %>
+  <div class="alert alert-error">
+    Givegoods is reviewing your account and will activate your account very soon.
+  </div>
+<% end %>

@@ -1,0 +1,44 @@
+#
+# Format:
+# 
+# <stage name>:
+#   app: <Heroku app name>
+#   stack: <Heroku stack, optional>
+#   tag: <git tag pattern, optional>
+#   repo: <git repository, optional>
+#   config:
+#     - <Heroku config:var name>: <Heroku config:var value>
+#
+production: 
+  stack: cedar
+  app: givegoods-production
+  tag: production/*
+  config:
+    BUNDLE_WITHOUT: "development:test:staging"
+    RACK_ENV: "production"
+    RAILS_ENV: "production"
+    ERROR_PAGE_URL: https://s3.amazonaws.com/givegoods-org/static/500.html 
+    MAINTENANCE_PAGE_URL: https://s3.amazonaws.com/givegoods-org/static/maintenance.html
+  addons:
+    - heroku-postgresql:basic
+    - pgbackups:auto-month
+    - newrelic:standard
+    - ssl
+
+staging:
+  stack: cedar
+  app: givegoods-staging
+  config: &default
+    BUNDLE_WITHOUT: "development:test:production"
+    RACK_ENV: "staging"
+    RAILS_ENV: "staging"
+    ERROR_PAGE_URL: https://s3.amazonaws.com/givegoods-org/static/500.html 
+    MAINTENANCE_PAGE_URL: https://s3.amazonaws.com/givegoods-org/static/maintenance.html
+  addons:
+    - heroku-postgresql:dev
+    - pgbackups:auto-week
+    - newrelic:standard
+
+#demo: 
+  #app: awesomeapp-demo
+  #config: *default

@@ -1,0 +1,41 @@
+<div class="page-header">
+  <h1>Account Settings</h1>
+</div>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-inline' }) do |f| %>
+  <%= error_group_for(f) do -%>
+    There was a problem updating your account:
+  <% end -%>
+
+  <%= control_group_for(f, :first_name) do %>
+    <%= f.text_field :first_name, :tabindex => autotabindex %>
+  <% end %>
+
+  <%= control_group_for(f, :last_name) do %>
+    <%= f.text_field :last_name, :tabindex => autotabindex %>
+  <% end %>
+
+  <%= control_group_for(f, :email) do %>
+    <%= f.email_field :email, :tabindex => autotabindex %>
+  <% end %>
+
+  <%= control_group_for(f, :current_password) do %>
+    <%= f.password_field :current_password, :tabindex => autotabindex %>
+  <% end %>
+
+  <fieldset>
+    <legend>Update password</legend>
+
+    <p><small>To update your password, use the fields below. Leave these blank if you don't want to change it.</small></p>
+
+    <%= control_group_for(f, :password) do %>
+      <%= f.password_field :password, :tabindex => autotabindex %>
+    <% end %>
+
+    <%= control_group_for(f, :password_confirmation) do %>
+      <%= f.password_field :password_confirmation, :tabindex => autotabindex %>
+    <% end %>
+  </fieldset>
+
+  <%= f.submit "Update", :class => "btn btn-primary", :tabindex => autotabindex %>
+<% end %>

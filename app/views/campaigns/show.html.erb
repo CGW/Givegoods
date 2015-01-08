@@ -1,0 +1,160 @@
+<div class="campaign">
+  <div class="campaign-banner">
+    <div class="container">
+      <div class="row-small">
+        <div class="spanLeft">
+          <h5>Donate to <%= @charity.name %></h5>
+        </div>
+        <div class="spanRight">
+          <%= link_to 'Get Rewards When You Donate', charity_merchants_path(@charity), :class => 'btn btn-primary input-block-level' %>
+        </div> 
+      </div> 
+    </div>
+  </div>
+
+  <div class="campaign-main">
+    <div class="container">
+
+      <div class="campaign-header">
+        <div class="invisible-well">
+          <h1><%= @campaign.tagline %></h1>
+        </div>
+      </div>
+
+      <div class="row-small">
+        <div class="spanLeft">
+          <div class="campaign-content">
+            <div class="well">
+              <div class="clearfix">
+                <h4 class="pull-left">1. Choose Giving Amount</h4>
+  
+                <div class="pull-right campaign-security">
+                  <%= image_tag 'lock.png', :alt => '', :width => '10' %>
+                  <strong>Secure</strong>
+                </div>
+              </div>
+  
+              <% @campaign.tiers.each do |tier| %>
+                <hr />
+  
+                <div class="clearfix">
+                  <% tier_amount = tier.amount.format(:delimiter => false, :symbol => false) %>
+                  <button href="#new_donation_order" class="pull-left btn btn-tier" data-bind="css: { 'btn-active': formattedDonationAmount() == '<%= tier_amount %>' }, click: formattedDonationAmount.bind($data, '<%= tier_amount %>')">
+                    <%= tier.amount.format(:no_cents_if_whole => true) %>
+                  </button>
+                  <div class="span6 campaign-tier-description">
+                    <%= content_tag("span", tier.tagline, :title => tier.tagline) %>
+                  </div>
+                </div>
+              <% end %>
+  
+              <hr />
+  
+              <%= form_tag(false, :class => 'form-inline form-amount', :method => :get, :"data-bind" => 'submit: function(data, event) { formattedDonationAmount($("input[name=\'other_amount\']").val()) }') do |f| %>
+                <div class="input-prepend">
+                  <span class="add-on">$</span>
+                  <%= text_field_tag 'other_amount', '', :placeholder => 'Donate amount'    %>
+                </div>
+                <%= button_tag 'Submit', :class => 'btn btn-tier' %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="campaign-content">
+            <%= form_for @donation_order, :url => charity_campaign_donation_orders_path(@charity, @campaign.slug) do |f| %>
+              <div class="well">
+                <div class="clearfix">
+                  <h4 class="pull-left">2. Enter Billing Details</h4>
+  
+                  <div class="pull-right campaign-security">
+                    <%= image_tag 'lock.png', :alt => '', :width => '10' %>
+                    <strong>Secure</strong>
+                  </div>
+                  <div class="pull-right campaign-credit-cards">
+                    <%= image_tag 'mastercard.png', :alt => 'Mastercard' %>
+                    <%= image_tag 'visa.png', :alt => 'Visa' %>
+                  </div>
+                </div>
+  
+                <br />
+  
+                <%= render(:partial => 'donation_orders/form_fields_amount', :locals => { :form => f, :charity => @charity, :campaign => @campaign, :donation_order => @donation_order }) %>
+  
+                <br />
+  
+                <%= render(:partial => 'donation_orders/form_fields_info', :locals => { :form => f, :charity => @charity, :campaign => @campaign, :donation_order => @donation_order }) %>
+              </div>
+  
+              <div class="invisible-well center">
+                <p>Yes, I want to donate $<span data-bind="text: formattedDonationAmount"></span> to <%= @charity.name %>.</p>
+  
+                <div class="float-middle submit">
+                    <%= f.fields_for(:customer, @donation_order.customer) do |customer_form| %>
+                      <%= customer_form.label :terms, :class => 'checkbox' do %>
+                        <p>
+                          <%= customer_form.check_box :terms, :tabindex => autotabindex %>
+                          I agree to the <%= link_to 'Terms and Conditions', page_path('terms-and-conditions') %>
+                        </p>
+                      <% end %>
+                    <% end %>
+                    <%= f.submit 'Donate Now', :class => 'btn btn-pink btn-block', :disable_with => 'Submitting donation...', :tabindex => autotabindex %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="spanRight">
+          <div class="campaign-side">
+            <div class="well-small">
+              <%= image_tag(@charity.picture.campaign_sidebar) %>
+  
+              <%= render_if_present(@campaign_stat.donations_count >= 5) do %>
+                <div class="donation-stats clearfix">
+                <div class="pull-left">
+                  <h5>Raised:</h5>
+                  <h3><%= @campaign_stat.donations_amount_sum.format(:no_cents => true) %></h3>
+                </div>
+                <div class="pull-right">
+                  <h5>Donors:</h5>
+                  <h3><%= number_with_delimiter(@campaign_stat.donations_count) %></h3>
+                </div>
+              </div>
+            <% end %>
+  
+              <%= render_if_present(@charity.description) do %>
+                <h6>About Us:</h6>
+                <%= simple_format(@charity.description) %>
+            <% end %>
+  
+            <%= render_if_present(@charity.website_url) do %>
+              <br />
+              <p>Visit our <%= link_to('website', @charity.website_url, :'data-popup' => true) %>.</p>
+            <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <br />
+
+</div>
+
+
+<%= javascript_tag do %>
+  $(function(){
+    var campaignView = new CampaignView();
+    campaignView.formattedDonationAmount('<%= @donation_order.donation.amount.format(:symbol => false, :delimiter => false) %>')
+    ko.applyBindings(campaignView);
+  });
+
+  $('.btn-tier').click(function() {
+    $('html, body').animate({
+      scrollTop: $('#new_donation_order').offset().top - 20
+    });
+  });
+<% end %> 

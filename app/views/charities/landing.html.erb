@@ -1,0 +1,29 @@
+<% @hide_header = true %>
+
+<div id="main" align="center" class="clearfix">
+  <br />
+  <br />
+  <br />
+  <br />
+
+  <h1>Donate to <%= @charity.name %></h1>
+  <h2>Two ways to give:</h3>
+
+  <div class="charity-donate-selection-box-wrapper clearfix">
+    <div class="charity-donate-selection-box pull-left">
+      <%= image_tag 'gift.png' %>
+      <h3>1. Donate &amp; Get Rewards.</h3>
+      <p>Local restaurants and merchants give you rewards for up to 50% off, as a thank you for your donation.</p>
+      <br />
+      <%= link_to 'Donate With Rewards', charity_merchants_path(@charity), :class => 'button' %>
+    </div>
+
+    <div class="charity-donate-selection-box pull-left">
+      <%= image_tag 'butterfly.png' %>
+      <h3>2. Donate Without Rewards.</h3>
+      <p>Make a donation, but choose not to receive thank you rewards from merchants in the community.</p>
+      <br />
+      <%= link_to 'Donate Without Rewards', charity_campaign_default_path(@charity, @charity.campaign.slug), :class => 'button' %>
+    </div>
+  </div>
+</div>

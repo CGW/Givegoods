@@ -1,0 +1,115 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123007814447412";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+
+<style>
+body {
+background-color: #EEFFEE;
+}
+
+
+  #success-form {
+    float:left;
+    width: 500px;
+    margin: 20px;
+    margin-top: 40px;
+  }
+  #checkout-sidebar {
+    float: right;
+    width: 230px;
+    display: inline;
+  }
+  .h2-checkout {
+    padding: 0px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+
+  #checkout-sidebar p {
+    text-align: right;
+  }
+
+  .hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+ p {
+   font-size: 12px;
+   margin: 0px;
+   line-height: 16px;
+ }
+
+</style>
+
+<div id="main">
+  <div id="loginpage">
+
+    <div id="checkout-sidebar">
+      <p><h3>Hey <%= @order.buyer.first_name %>,<br><span style="font-size: 24px;">Build Karma Points</span><br></h3></p>
+
+      <p style="text-align:left">If you believe in our mission, please help us share the rewards.</p>
+      
+      <br />
+
+      <div class="checkout-sidebar-inner">
+        <img src="/assets/facebook.jpg" width="200px" style="margin-bottom: 5px"><br>
+        <div class="fb-like" data-target="blank" data-href="http://givegoods.org/home" data-send="true" data-layout="button_count" data-width="450" data-show-faces="true" data-action="recommend" data-font="arial"></div>
+      </div>
+
+      <div class="checkout-sidebar-inner">
+        <a target="blank" href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fgivegoods.org/home&media=http%3A%2F%2Fwww.givegoods.org%2Fassets%2Fpusteblume_blue.png&description=Get%20when%20you%20give.%20Give%20to%20charities%2C%20get%20your%20entire%20donation%20back%20as%20rewards%20to%20local%20merchants." class="pin-it-button" count-layout="horizontal"><img border="0" width="200px" src="/assets/pinterest.png" title="Pin It" /></a>
+      </div>
+    </div>
+
+    <div id="success-form">
+
+      <h1>Success</h1>
+      <h3>Your transaction has completed without a hitch.</h3>
+      <p>
+        <% if @certificates.present? %>
+          You have also been sent an email with a copy of your receipt and links to print out all your certificates.
+        <% else %>
+          You have also been sent an email with a copy of your receipt.
+        <% end %>
+      </p>
+
+      <hr />
+
+      <h3>You made the following charitable <%= "gift".pluralize(@charities.size) %>:</h3>
+      <% @charities.each do |charity| %>
+        <h1>$<%= @order.charity_donation_total(charity) %></h1>
+        <p>to <%= charity.name %></p>
+      <% end %>
+
+      <% if @certificates.present? %>
+        <% if @order.donations_total_amount > 0 %>
+          <hr />
+          <h3>You may deduct the following amount:</h3>
+          <h1>$<%= @order.donations_total_amount %></h1>
+        <% end %>
+
+        <hr />
+
+        <div id="rewards">
+          <h3>You have received the following rewards:</h3>
+          <p>To redeem a reward, print out the certificate below and present it to the merchant at the time of purchase.</p>
+
+          <br />
+
+          <%= render :partial => "certificates/certificate_small", :collection => @certificates, :as => :certificate %>
+        </div>
+      <% end %>
+    </div>
+
+   <div class="clear"></div>
+
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<% if params[:return_to_merchants] == 'true' %>
+  window.location = '<%= merchants_path %>';
+<% else %>
+  $("#lightbox").remove();
+  basket = new Basket();
+  basket.render();
+<% end %>

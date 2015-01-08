@@ -1,0 +1,48 @@
+<div class="page-header"> 
+  <h1>Purchase history</h1>
+</div>
+
+<%= form_for :certificate_action_filter, :url => user_merchant_certificates_path, :method => :put, :html => { :class => 'form-inline' } do |f| %>
+  <div class="clearfix">
+    <div class="user-form-panel pull-left">
+      <%= f.label :update_status, "Mark selected as:" %>
+        <%= f.select :update_status, collection_for_update_state, {}, :class => 'span2' %>
+        <%= submit_tag "Go", :name => "_update", :class => 'btn btn-small' %>
+    </div>
+    <div class="user-form-panel pull-right">
+      <%= f.label :filter_status, "Filter by status:" %>
+      <%= f.select :filter_status, collection_for_filter_state, {}, :class => 'span2' %>
+      <%= submit_tag "Go", :name => "_filter", :class => 'btn btn-small' %>
+    </div>
+  </div>
+  
+  <hr />
+
+  <%= render_if_present(@certificates) do %> 
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><%= f.check_box :select_all, :id => "select-all" %></th>
+          <th>Status</th>
+          <th>Customer </th>
+          <th>ID Number</th>
+          <th>Purchase Date</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @certificates.each do |certificate| %>
+        <tr>
+          <td>
+            <%= check_box_tag "certificate_action_filter[selected][]",
+              certificate.id, @certificate_action_filter.selected?(certificate) %>
+          </td>
+          <td><%= certificate.status %></td>
+          <td><%= certificate.customer.name %></td>
+          <td><%= certificate.code %></td>
+          <td><%=l certificate.created_at.to_date %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>

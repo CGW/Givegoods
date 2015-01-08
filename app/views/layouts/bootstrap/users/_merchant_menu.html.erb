@@ -1,0 +1,26 @@
+<% merchant ||= current_user.merchant %>
+
+<%= render_if_present(!merchant) do %>
+  <%= image_tag Charity.new.picture.grid.url, :class => 'img-rounded' %>
+ 
+  <br />
+  <br />
+<% end %>
+
+<%= render_if_present(merchant) do %>
+  <%= image_tag merchant.picture.grid.url, :class => 'img-rounded' %>
+  <h5 align="center"><%= merchant.name %></h5>
+<% end %>
+
+<div class="well user-settings-nav-panel">
+  <ul class="nav nav-list">
+    <li><%= link_to 'Merchant profile', edit_user_merchant_path %></li>
+
+    <%= render_if_present(merchant) do %>
+      <li><%= link_to 'Reward settings', edit_user_merchant_offer_path %></li>
+      <li><%= link_to 'Purchase history', user_merchant_certificates_path %></li>
+    <% end %>
+
+    <li><%= link_to 'Account settings', edit_user_registration_path %></li>
+  </ul>
+</div>

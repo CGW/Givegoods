@@ -1,0 +1,152 @@
+@import "bootstrap_variables";
+@import "bootstrap";
+@import "bootstrap_utilities";
+@import "footer";
+@import "jquery-ui";
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.header-wrapper {
+  background-color: $blackSoft; 
+}
+
+#header-inner {
+  margin: 17px 0;
+  line-height: 25px;
+
+  .header-inner-nav {
+    font-size: 14px;
+
+    a {
+      display: block;
+      float: right;
+      margin-left: 30px;
+      color: #777;
+
+      &:hover {
+        color: $electricBlue;
+      }
+    }
+  }
+}
+
+.content-wrapper {
+  padding-bottom: 30px; 
+
+  .container {
+    background-color: $white;
+    border: $tanDark 4px solid;
+    border-top-width: 0;
+  }
+
+  .content {
+    padding: 10px 30px 30px;
+
+    h1, h2, h3, h4, h5, h6 {
+      color: $grayDarker;
+    }
+  }
+}
+
+.login-panel {
+  border: 4px solid $tanDarker;
+  background-color: $yellowSoft;
+
+  form {
+    margin-bottom: 0px;
+  }
+}
+
+.user-settings-content {
+  .page-header {
+    margin-top: 10px;
+  }
+
+  .field_with_errors {
+    display: inline;
+  }
+}
+
+.user-settings-nav-panel {
+  padding: 8px 0;
+}
+
+.role-assignment {
+  width: 700px;
+  margin: 0 auto;
+
+  form { 
+    margin: 0;
+    padding: 0;
+  }
+
+  .row div {
+    margin-bottom: 0px;
+  }
+
+  .roles div {
+    cursor: pointer;
+  }
+
+  img { 
+    float: left;
+    height: 53px;
+    margin-right: 20px;
+  }
+}
+
+.user-form-panel {
+  width: 300px;
+}
+
+.user-form-help-panel {
+  background-color: $greenPastel;
+  border-color: $grayLight;
+
+  ol {
+    margin-left: 16px;
+  }
+}
+
+.alert-policy {
+  @include border-radius(8px);
+  border: 0px;
+  font-weight: 500;
+  font-size: 18px;
+
+  .alert-policy-status {
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+}
+
+.alert-policy-success {
+  background-color: $successBackground;
+  color: $successText;
+  background-image: image-url('users/green-check.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding-right: 60px;
+}
+
+// ------------------------------------------------------
+// alerts
+.alert-error {
+  ul {
+    margin-bottom: 0;
+  }
+}
+
+// ------------------------------------------------------
+// forms
+
+// Rails default form builder wraps our label in this class; lets make sure
+// the color matches
+.field_with_errors label {
+  color: $errorText;
+}

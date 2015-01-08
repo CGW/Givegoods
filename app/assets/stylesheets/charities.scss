@@ -1,0 +1,16 @@
+
+.charity-donate-selection-box-wrapper {
+  width: 760px;
+}
+
+.charity-donate-selection-box { 
+  @include rounded-corners;
+  width: 300px;
+  padding: 20px;
+  margin: 10px 20px;
+  background-color: $tanDark;
+
+  .button {
+    float: none;
+  }
+}

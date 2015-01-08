@@ -1,0 +1,3 @@
+<p>Welcome, <%= @resource.name %>.</p>
+
+<p>To get started with Givegoods, please first <%= link_to 'confirm your account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %>.</p>

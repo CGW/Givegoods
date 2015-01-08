@@ -1,0 +1,53 @@
+- if defined?(f)
+  = f.inputs "Merchant Details" do
+    = f.input :name
+    = f.input :description, :input_html => {:class => 'autogrow', :rows => 5, :cols => 20}
+    = f.input :website_url, :as => :string
+    = f.input :picture, :as => :file
+    = f.input :remote_picture_url, :label => "or Remote Picture URL"
+  = f.semantic_fields_for :address, f.object.address || f.object.build_address do |a|
+    = a.inputs "Address" do
+      = a.input :phone
+      = a.input :street, :input_html => {:class => 'autogrow', :rows => 2, :cols => 20}
+      = a.input :city
+      = a.input :postal_code
+      = a.input :province_code, :collection => Region.all.collect {|r| [r.code, r.code]}
+      = a.input :country_code, :as => :hidden, :value => "US"
+  - unless f.object.new_record?
+    = f.semantic_fields_for :offer, f.object.offer || f.object.build_offer(:status => "paused") do |o|
+      = o.inputs "Offer Details" do
+        = o.input :status, :as => :radio, :collection => Offer::STATUSES
+        = o.input :discount_rate, :as => :select, :collection => Offer::DISCOUNT_RATES
+        = o.input :offer_cap
+        = o.input :max_certificates, :as => :select, :collection => Offer::MAX_CERTIFICATES
+        = o.input :tagline, :input_html => {:class => 'autogrow', :rows => 5, :cols => 20}
+        = o.input :rules, :input_html => {:class => 'autogrow', :rows => 5, :cols => 20}
+        %li{:class => "radio"}
+          %fieldset
+            %legend{:class => "label"}
+              %label Supported Charities
+            %ol
+              %li
+                = o.label :charity_selection_all do
+                  = o.radio_button :charity_selection, "all"
+                  %span
+                    All Charities
+              %li
+                = o.label :charity_selection_one do
+                  = o.radio_button :charity_selection, "one"
+                  %span
+                    One Charity, called:
+                    = o.hidden_field :charity_id, :id => "offer_charity_id"
+                    = o.autocomplete_field :charity_name, autocomplete_charity_name_admin_merchants_path, :id_element => '#offer_charity_id'
+              %li
+                = o.label :charity_selection_near do
+                  = o.radio_button :charity_selection, "near"
+                  %span
+                    Charities near:
+                    = o.text_field :charities_near, :id => "offer_charities_near"
+- else
+  = semantic_form_for [:admin, @merchant], :html => {:multipart => true} do |f|
+    = render "admin/merchants/form", :f => f
+    = f.actions
+
+= render "shared/autocomplete_location"

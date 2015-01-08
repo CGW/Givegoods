@@ -1,0 +1,25 @@
+<% merchant ||= nil %>
+
+<% content_for :grid_right do %>
+  <% if charities.count > 0 %>
+    <div class="card-group card-group-singles clearfix">
+      <% charities.each do |charity| %>
+        <div class="card" id="<%= dom_id(charity) %>">
+          <%= link_to merchant ? [merchant, charity] : [charity, :merchants], :remote => !!merchant do %>
+            <div class="card-image">
+              <%= image_tag charity.picture.grid, :class => 'clip-image', :alt => charity.name %>
+            </div>
+            <h2><%= charity.name %></h2>
+            <%# Add nbsp to the end so h3 renders regardless; otherwise grid breaks from alignment issues %>
+            <h3><%= charity.city_and_state %>&nbsp;</h3>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <br />
+    <p align="center">Sorry! We couldn't find any charities that matched your request.</p>
+  <% end %>
+<% end %>
+
+<%= render "shared/grid/index" %>

@@ -1,0 +1,23 @@
+<%# merchants/sidebar %>
+<div id="left-inner">
+  <img class="profile-image" src="<%= @charity.picture.url %>"/>
+  <div id="profile-text">
+     <span class="profile-h2">
+     <p><%= @charity.description %></p>
+     <p><%= link_to "Visit Website", @charity.website_url, :target => "_blank" unless @charity.website_url.empty? %></p>
+
+  </span>
+  </div>
+</div>
+<div id="left-inner" align="center">
+  <span class="profile-h2">Dollars raised on Givegoods:</span><br />
+  <span class="profile-h1">
+    <%= @charity.total_donation_amount.format(:no_cents_if_whole => true) %>
+  </span>
+  <p>
+    <span class="profile-h2">Donations:</span><br />
+    <span class="profile-h1">
+      <%= number_to_human(@charity.total_donation_count) %>
+    </span>
+  </div>
+</div>

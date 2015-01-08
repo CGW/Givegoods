@@ -1,0 +1,13 @@
+body {
+  width: 500px;
+  margin: 30px auto;
+  font-family: Helvetica, Arial;
+}
+
+#printable {
+  border: 1px dashed #333333;
+  padding: 10px;
+}
+
+@import "variables";
+@import "certificates";

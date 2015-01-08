@@ -1,0 +1,25 @@
+<% body_options :class => "body-welcome" %>
+<meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
+<div id="main">
+  <div class="welcome">
+    <div class="welcome-title">Rewards<br>For Giving.</div>
+    <p>What if you could save $40 at a local restaurant when you donate $20 to your favorite charity?</p> 
+    <p>We believe in a new kind of giving economy, where donors receive community rewards when they donate. We are in public beta, providing our new service to the beautiful city of Alameda, CA and San Francisco East Bay.</p>     
+
+    <div class="welcome-nav clearfix">
+      <%= link_to 'Give', charities_path, :class => 'button' %>
+      <%= link_to 'Join', page_path('join'), :class => 'button' %>
+      <%= link_to 'Learn', page_path('about'), :class => 'button' %> 
+    </div>
+  </div>
+</div>
+
+<% content_for(:footer_hat) do %>
+  <div class="container">
+    <div class="footer-hat">           
+      <div class="footer-hat-image"><%= image_tag('pusteblume_new.png') %></div>
+      <span class="font-small">Copyright 2012 Givegoods, in collaboration with <a data-popup="true" style="color:inherit" href="http://subtxt.us">SUBTXT, LLC.</a></span>
+    </div>
+  </div>
+<% end %>

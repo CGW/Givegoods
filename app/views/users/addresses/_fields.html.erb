@@ -1,0 +1,23 @@
+<%= control_group_for(builder, :phone) do %> 
+  <%= builder.text_field :phone, :placeholder => 'Number displayed in profile', :tabindex => autotabindex %>
+<% end %>
+
+<br />
+
+<%= control_group_for(builder, :street) do %> 
+  <%= builder.text_field :street, :tabindex => autotabindex %>
+<% end %>
+
+<%= control_group_for(builder, :city) do %> 
+  <%= builder.text_field :city, :tabindex => autotabindex %>
+<% end %>
+
+<%= control_group_for(builder, :province_code) do %> 
+  <%= builder.select :province_code, Region.all.collect {|r| [r.name, r.code]}, { :include_blank => true }, :class => 'span2', :tabindex => autotabindex %>
+<% end %>
+
+<%= control_group_for(builder, :postal_code) do %> 
+  <%= builder.text_field :postal_code, :tabindex => autotabindex, :class => 'span2' %>
+<% end %>
+
+<%= builder.hidden_field :country_code, :value => 'US' %>

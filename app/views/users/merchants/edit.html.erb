@@ -1,0 +1,16 @@
+<div class="page-header"> 
+  <h1>
+    Merchant profile 
+    <% if @merchant.active? %>
+      <small><%= link_to "View public page", merchant_charities_path(@merchant), :'data-popup' => true %></small>
+    <% end %>
+  </h1>
+</div> 
+
+<p>Edit your merchant information and merchant image. This information will be shown publicly on Givegoods.</p>
+
+
+<br />
+
+
+<%= render :partial => 'form', :locals => { :merchant => @merchant } %>

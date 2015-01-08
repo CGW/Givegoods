@@ -1,0 +1,44 @@
+<% content_for(:javascripts) do %>
+  <%= javascript_include_tag('bootstrap/application') %>
+<% end %>
+
+<% content_for(:stylesheets) do %>
+  <%= stylesheet_link_tag('bootstrap/application') %>
+<% end %>
+
+<% content_for(:body) do %>
+  <div class="wrapper">
+    <div class="header-wrapper">
+      <div class="container">
+        <%= render :partial => "layouts/header" %>
+      </div>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="content">
+          <% [:warning, :error, :notice, :alert, :success].each do |x| %>
+            <% if flash[x].present? %>
+              <%= content_tag(:div, flash[x], :class => "alert alert-#{x}") %>
+            <% end %>
+          <% end %>
+
+          <%= content_for?(:content) ? yield(:content) : yield %>
+        </div>
+      </div>
+    </div>
+
+    <%# Necessary for the footer-hat to work %>
+    <div class="push"></div>
+  </div>
+
+  <div class="footer-hat-wrapper"></div>
+
+  <div class="footer-wrapper">
+    <div class="container">
+      <%= render :partial => 'layouts/footer' %>
+    </div>
+  </div>
+<% end %>
+
+<%= render :template => 'layouts/bootstrap' %>

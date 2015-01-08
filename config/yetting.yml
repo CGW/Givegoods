@@ -1,0 +1,23 @@
+development:
+  facebook:
+    app_id: '130082367105407'
+    app_secret: '0d0cc7aa66cfd82fd38345483994dc9a'
+    scope: 'email'
+
+test:
+  facebook:
+    app_id: 'facebook_app_key'
+    app_secret: 'facebook_app_secret'
+    scope: 'email'
+
+production:
+  facebook:
+    app_id: '191192460973580'
+    app_secret: 'fc604449f2fdab6f5144c65033530c6b'
+    scope: 'email'
+
+staging:
+  facebook:
+    app_id: '130082367105407'
+    app_secret: '0d0cc7aa66cfd82fd38345483994dc9a'
+    scope: 'email'

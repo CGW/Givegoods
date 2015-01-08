@@ -1,0 +1,26 @@
+<% merchant_ids = bundle.offers.map(&:merchant_id) %>
+<div class="card clearfix" id="<%= dom_id(bundle) %>">
+  <%= link_to [charity, bundle], :remote => true, 'data-merchants' => merchant_ids.join(',') do %>
+    <div class="card-image pull-left">
+      <%= image_tag bundle.image.grid, :class => 'clip-image' %>
+    </div>
+    <div class="card-details">
+      <h2>Donate <%= bundle.donation_value.format(:no_cents_if_whole => true) %>: <%= bundle.name %></h2>
+
+      <%= render_if_present(bundle.tagline) do %>
+        <p>How it helps: <%= bundle.tagline %></p>
+      <% end %>
+
+      <%= render_if_present(bundle.tagline) do %>
+        <p><%= bundle.notes %></p>
+      <% end %>
+
+      <span>As a thank you, save up to <%= bundle.total_offer_value.format(:no_cents_if_whole => true) %> in rewards at:</span>
+      <ul>
+        <% bundle.offers.each do |offer| %>
+          <li><%= offer.merchant.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

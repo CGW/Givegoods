@@ -1,0 +1,21 @@
+<div class="page-header">
+  <h1>Change your password</h1>
+</div>
+
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= error_group_for(f) do -%>
+    There was a problem updating your password
+  <% end -%>
+
+  <%= f.hidden_field :reset_password_token %>
+
+  <%= control_group_for(f, :password, :label => 'New password') do %>
+    <%= f.password_field :password, :tabindex => autotabindex %>
+  <% end %>
+
+  <%= control_group_for(f, :password_confirmation, :label => 'Confirm new password') do %>
+    <%= f.password_field :password_confirmation, :tabindex => autotabindex %>
+  <% end %>
+
+  <%= f.submit "Change my password", :class => 'btn btn-primary', :tabindex => autotabindex %>
+<% end %>

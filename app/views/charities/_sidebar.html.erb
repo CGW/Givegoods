@@ -1,0 +1,20 @@
+<%# charities/sidebar %>
+<div id="left-inner">
+  <img class="profile-image" src="<%= @merchant.picture.url %>"/>
+  <div id="profile-text">
+    <span class="profile-h2">
+  <%= @merchant.description %>
+  <br>
+  <p><%= @merchant.address.street %> <%= @merchant.city_and_state %></p>
+  <%= link_to "Website", @merchant.website_url, :target => "_blank" unless @merchant.website_url.empty? %> |
+  <a target="blank" href="http://maps.google.com/?q=<%= @merchant.address.street %>, <%= @merchant.city_and_state %>">Map</a>
+
+   </span>
+  </div>
+</div>
+
+<div id="left-inner" align="center">
+  <span class="profile-h2">Dollars raised on Givegoods:</span><br /><span class="profile-h1"><%= @merchant.total_donation_amount.format(:no_cents_if_whole => true) %></span><p>
+    <span class="profile-h2">Donations:</span><br /><span class="profile-h1"><%= number_to_human(@merchant.total_donation_count) %></span>
+  </div>
+</div>

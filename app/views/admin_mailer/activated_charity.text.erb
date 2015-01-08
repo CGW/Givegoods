@@ -1,0 +1,10 @@
+<%= @greeting %>,
+
+The charity, <%= @charity.name %>, has been activated. 
+
+Related urls:
+  - Admin:   <%= admin_charity_url(@charity) %>
+  - Landing: <%= charity_landing_url(@charity) %>
+
+your email slave,
+<%= render "shared/mailer/footer" %>

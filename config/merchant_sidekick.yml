@@ -1,0 +1,19 @@
+development:
+  authorize_net_gateway:
+    login_id: foo
+    transaction_key: bar
+    mode: test
+test:
+  authorize_net_gateway:
+    login_id: foo
+    transaction_key: bar
+    mode: test
+staging:
+  authorize_net_gateway:
+    login_id: foo
+    transaction_key: bar
+    mode: test
+production:
+  authorize_net_gateway:
+    login_id: 8WhJL7k5bz
+    transaction_key: 6A9jh6Jt32eq3BrD

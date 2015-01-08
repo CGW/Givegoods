@@ -1,0 +1,147 @@
+<%= form_for donation_order, :url => charity_campaign_donation_orders_path(charity, campaign.slug), :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%= error_group_for(f) do %>
+  Test
+  <% end %>
+
+  <% if donation_order.errors.any? %>
+    <hr />
+    <p class="text-error">Oops! There was a few problems with the information you gave us:</p>
+    <ul>
+      <% [ "payment", "donation.amount", "customer.first_name", "customer.last_name", "customer.email", "customer.billing_address.postal_code", "customer.terms" ].each do |field| %>
+        <% if f.error_message_on(field).present? %>
+          <li><%= f.error_message_on(field) %></li>
+        <% end %>
+      <% end %>
+      <% if f.error_message_on("credit_card.year").present? %>
+        <li><%= t('activerecord.errors.models.credit_card.attributes.year.expired') %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <hr />
+
+  <h3>Make a single donation of:</h3>
+
+  <%= f.fields_for(:donation) do |donation_form| %> 
+    <fieldset class="radio">
+      <% campaign.tiers.sort_by(&:amount).each do |tier| %>
+        <label class="radio">
+          <%= donation_form.radio_button :tier_amount, tier.amount.format(:symbol => false), :checked => donation_order.donation.amount == tier.amount %>
+          <% if tier.tagline.present? %> 
+            <%= "#{tier.amount.format(:no_cents_if_whole => true)}: #{tier.tagline}" %>
+          <% else %>
+            <%= "#{tier.amount.format(:no_cents_if_whole => true)}" %>
+          <% end %>
+        </label>
+      <% end %>
+      <%= donation_form.label :amount, :class => 'radio' do %>
+        Or, donate any amount:
+        <%= donation_form.text_field :amount, :class => 'input-mini', :value => donation_order.donation.amount, :tabindex => autotabindex %>
+      <% end %>
+    </fieldset>
+  <% end %>
+
+  <hr />
+
+  <div class="clearfix">
+    <div class="form-split pull-left">
+      <fieldset>
+        <h3>Donor Info:</h3>
+
+        <%= f.fields_for(:customer, donation_order.customer) do |customer_form| %>
+          <%= control_group_for(customer_form, :first_name, :label => "First Name") do %>
+            <%= customer_form.text_field :first_name, :class => 'span2', :tabindex => autotabindex %>
+          <% end %>
+
+          <%= control_group_for(customer_form, :last_name, :label => "Last Name") do %>
+            <%= customer_form.text_field :last_name, :class => 'span2', :tabindex => autotabindex %>
+          <% end %>
+
+          <%= control_group_for(customer_form, :email, :label => "Email Address") do %>
+            <%= customer_form.text_field :email, :class => 'span2', :tabindex => autotabindex %>
+          <% end %>
+
+          <br />
+          <h3>Mailing Info:</h3>
+          <p><small class="muted">Please fill out the fields below if you would like receive information from the charity.</small></p>
+
+          <%= customer_form.fields_for(:billing_address, :include_id => false) do |billing| %>
+            <%= control_group_for(billing, :street, :label => "Street Address") do %>
+              <%= billing.text_field :street, :class => 'span2', :tabindex => autotabindex %>
+            <% end %>
+
+            <%= control_group_for(billing, :city, :label => "City") do %>
+              <%= billing.text_field :city, :class => 'span2', :tabindex => autotabindex %>
+            <% end %>
+
+            <%= control_group_for(billing, :state_code, :label => "State") do %>
+              <%= billing.select :state_code, Region.all.collect {|r| [r.name, r.code]}, { :include_blank => true }, :class => 'span2', :tabindex => autotabindex %>
+            <% end %>
+
+            <%= billing.hidden_field :country_code, :value => 'US' %>
+          <% end %>
+        <% end %>
+      </fieldset>
+    </div>
+
+    <div class="form-split pull-right">
+      <fieldset class="billing-info">
+        <h3>Billing Info:</h3>
+
+        <%= f.fields_for(:credit_card, donation_order.credit_card) do |cc_form| %>
+          <%= control_group_for(cc_form, :type, :label => "CC Type") do %>
+            <%= cc_form.select :type, MerchantSidekick::default_gateway.supported_cardtypes.map {|t| ["#{t}".titleize, t]}, {}, :class => 'span2', :tabindex => autotabindex %>
+          <% end %>
+
+          <%= control_group_for(cc_form, :number, :label => "CC Number") do %>
+            <%= cc_form.text_field :number, :class => 'span2', :tabindex => autotabindex %>
+          <% end %>
+
+          <%= control_group_for(cc_form, :year, :label => "CC Expiration") do %>
+            <%= cc_form.select :month, (1..12).collect{ |n| ["#{n} - #{I18n.t('date.month_names')[n]}", n] }, {}, :class => 'input-small', :tabindex => autotabindex %>
+            <%= cc_form.select :year, Date.today.year..Date.today.year+8, {}, :class => 'input-mini', :tabindex => autotabindex %>
+          <% end %>
+
+          <%= control_group_for(cc_form, :verification_value, :label => "CVC") do %>
+            <%= cc_form.text_field :verification_value, :class => 'input-mini', :tabindex => autotabindex %>
+          <% end %>
+        <% end %>
+
+        <%= f.fields_for(:customer, donation_order.customer) do |cf| %>
+          <%= cf.fields_for(:billing_address_attributes, donation_order.customer.billing_address) do |billing| %>
+            <%= control_group_for(billing, :postal_code, :label => "Billing Zip Code") do %>
+              <%= billing.text_field :postal_code, :class => 'input-mini', :tabindex => autotabindex %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </fieldset>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="clearfix">
+    <div class="form-split pull-left">
+      <fieldset>
+        <%= f.fields_for(:customer, donation_order.customer) do |customer_form| %>
+          <%= customer_form.label :terms, :class => 'checkbox' do %>
+            <%= customer_form.check_box :terms, :tabindex => autotabindex %>
+            I agree to the <%= link_to 'Terms and Conditions', page_path('terms-and-conditions') %>
+          <% end %>
+          <%= customer_form.label :anonymous_donation, :class => 'checkbox' do %>
+            <%= customer_form.check_box :anonymous_donation, :tabindex => autotabindex %>
+            I wish to keep my donation anonymous
+          <% end %>
+        <% end %>
+      </fieldset>
+    </div>
+
+    <div class="form-split pull-right">
+      <div class="float-middle submit">
+        <h3 align="center">Donation total: $<span data-bind="text: formattedDonationAmount"></span></h3>
+        <%= f.submit 'Donate Now', :class => 'btn btn-pink btn-block', :tabindex => autotabindex %>
+      </div>
+    </div>
+  </div>
+<% end %>

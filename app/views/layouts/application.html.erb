@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="description" content="<%= t("site.meta_description") %>" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title><%= page_title %></title>
+
+  <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "//fonts.googleapis.com/css?family=Muli:300,400" %>
+  <%= javascript_include_tag "//maps.googleapis.com/maps/api/js?sensor=false" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+<!-- IPAD SCROLL LIGHTBOX -->
+
+<script type="text/javascript"> 
+  var myScroll;
+  $(document).ready(function() {
+    if ((navigator.userAgent.indexOf('iPhone') != -1) || (navigator.userAgent.indexOf('iPod') != -1) || (navigator.userAgent.indexOf('iPad') != -1)) {
+      myScroll = new iScroll('bundle_get');
+    } 
+  });
+</script>
+
+<%= render 'layouts/get_satisfaction' %>
+
+<style type="text/css">
+  a#fdbk_tab {
+  top: 60%;
+  }
+</style>
+
+<%= render 'layouts/google_analytics' %>
+
+</head>
+
+<%= content_tag :body, body_options do %>
+  <%= yield :javascript %>
+
+  <div class="wrapper">
+    <%= render_unless_present(@hide_header) do %>
+      <%= render :partial => 'layouts/header' %>
+    <% end %>
+
+    <% [:warning, :error, :notice, :alert].each do |x| %>
+      <% if flash[x].present? %>
+        <div class="alert-message #{x}"><%= flash[x] %></div>
+      <% end %>
+    <% end %>
+
+    <%= yield %>
+
+    <%# Necessary for the footer-hat to work %>
+    <div class="push"></div>
+  </div>
+
+  <div class="footer-hat-wrapper">
+    <%= yield :footer_hat %>
+  </div>
+
+  <div class="footer-wrapper">
+    <div class="container">
+      <%= render :partial => 'layouts/footer' %> 
+    </div>
+  </div>
+
+<% end %>
+</html>

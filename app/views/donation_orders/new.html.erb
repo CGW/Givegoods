@@ -1,0 +1,91 @@
+<div class="campaign">
+  <%= form_for @donation_order, :url => charity_campaign_donation_orders_path(@charity, @campaign.slug) do |f| %>
+
+    <div class="campaign-main campaign-amount">
+      <div class="container">
+        <div class="row-small">
+          <div class="spanLeft campaign-content">
+            <div class="well">
+              <h4>Donate to <%= @charity.name %></h4>
+
+              <%= render(:partial => 'donation_orders/form_fields_amount', :locals => { :form => f, :charity => @charity, :campaign => @campaign, :donation_order => @donation_order }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="campaign-main">
+      <div class="container">
+        <div class="row-small">
+            <% if @donation_order.errors.any? %>
+              <div class="spanLeft campaign-content campaign-error">
+                <div class="well">
+                  <p class="text-error">Oops! Looks like there was a problem with some of the information you gave us:</p>
+                  <ul>
+                    <% if f.error_message_on("credit_card.year").present? %>
+                      <li><%= t('activerecord.errors.models.credit_card.attributes.year.expired') %></li>
+                    <% end %>
+                    <% [ "payment", "donation.amount", "customer.first_name", "customer.last_name", "customer.email", "customer.billing_address.street", "customer.billing_address.city", "customer.billing_address.province_code", "customer.billing_address.postal_code", "customer.terms" ].each do |field| %>
+                      <% if f.error_message_on(field).present? %>
+                        <li><%= f.error_message_on(field) %></li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="spanLeft campaign-content">
+              <div class="well">
+                <div class="clearfix">
+                  <h4 class="pull-left">Billing Details</h4>
+
+                  <div class="pull-right campaign-security">
+                    <%= image_tag 'lock.png', :alt => '', :width => '10' %>
+                    <strong>Secure</strong>
+                  </div>
+                  <div class="pull-right campaign-credit-cards">
+                    <%= image_tag 'mastercard.png', :alt => 'Mastercard' %>
+                    <%= image_tag 'visa.png', :alt => 'Visa' %>
+                  </div>
+                </div>
+
+                <br />
+
+                <%= render(:partial => 'donation_orders/form_fields_info', :locals => { :form => f, :charity => @charity, :campaign => @campaign, :donation_order => @donation_order }) %>
+              </div>
+
+              <div class="invisible-well center">
+                <p>Yes, I want to donate $<span data-bind="text: formattedDonationAmount"></span> to <%= @charity.name %>.</p>
+
+                <div class="float-middle submit">
+                    <%= f.fields_for(:customer, @donation_order.customer) do |customer_form| %>
+                      <%= customer_form.label :terms, :class => 'checkbox' do %>
+                        <p>
+                          <%= customer_form.check_box :terms, :tabindex => autotabindex %>
+                          I agree to the <%= link_to 'Terms and Conditions', page_path('terms-and-conditions') %>
+                        </p>
+                      <% end %>
+                    <% end %>
+                    <%= f.submit 'Donate Now', :class => 'btn btn-pink btn-block', :disable_with => 'Submitting donation...', :tabindex => autotabindex %>
+                </div>
+              </div>
+            </div>
+        </div>
+
+      </div>
+
+    </div>
+  <% end %>
+  <br />
+
+</div>
+
+<%= javascript_tag do %>
+  $(function(){
+    var campaignView = new CampaignView();
+    campaignView.formattedDonationAmount('<%= @donation_order.donation.amount.format(:symbol => false, :delimiter => false) %>')
+    ko.applyBindings(campaignView);
+  });
+<% end %> 

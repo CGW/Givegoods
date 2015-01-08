@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title><%= page_title %></title>
+  <%= stylesheet_link_tag    "print" %>
+  <%= stylesheet_link_tag    "print", :media => 'print' %>
+  <%#= javascript_include_tag "print" %>
+  <%= csrf_meta_tags %>
+  <style type='text/css'>
+    .clearfix:after {
+      content:".";
+      display:block;
+      height:0;
+      clear:both;
+      visibility:hidden;
+    }
+    .clearfix {display:inline-block;}
+    /* Hide from IE Mac \*/
+      .clearfix {display:block;}
+    /* End hide from IE Mac */
+  </style>
+</head>
+<body style="">
+  <div id="printable">
+    <%= yield %>
+  </div>
+  <div style="width:500px">
+    <h4 style="margin: 10px; margin-left:0px; margin-top:20px;">Join Givegoods.</h4>
+    <span style="font-size: 12px">We're rapidly signing up new merchants and charities every day. Click here to <%= link_to "join now.", page_path('join'), :class => "nav-item"  %></span>
+    <br />
+    <br />
+  </div>
+</body>
+</html>

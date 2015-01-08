@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= page_title %></title>
+    <meta name="description" content="">
+    <meta name="author" content="Business Vision">
+    <meta property="og:title" content="<%= fb_page_title %>" />
+    <meta property="og:type" content="movie" />
+    <meta property="og:url" content="<%= url_for({}) %>" />
+    <meta property="og:image" content="<%= fb_page_thumbnail_url %>" />
+    <meta property="og:site_name" content="<%= t "site.name" %>" />
+    <meta property="fb:admins" content="" />
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/images/apple-touch-icon-114x114.png">
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="alert-message block-message error fade in hide"></div>
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/"><%=raw t(".topbar.brand") %></a>
+          <ul class="nav">
+          </ul>
+          <ul class="nav secondary-nav">
+            <li><%= link_to "Charities", charities_path %></li>
+            <li><%= link_to "Merchants", merchants_path %></li>
+
+            <% if user_signed_in? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle">
+                <%= current_user.email %>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "User Settings", edit_user_registration_path %></li>
+                <li><%= link_to "Merchant Settings", edit_user_merchant_path %></li>
+                <li><%= link_to "Offer Settings", edit_merchant_offer_path %></li>
+                <li><%= link_to "Sign out", destroy_user_session_path %></li>
+              </ul>
+            </li>
+            <% else %>
+            <li><%= link_to "Login / Signup", new_user_registration_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <% if notice.present? %>
+      <p class="alert-message success">
+        <%= notice %>
+        <a href="#" class="close">&times;</a>
+      </p>
+    <% end %>
+    <% if alert.present? %>
+      <p class="alert-message error">
+        <%= alert %>
+        <a href="#" class="close">&times;</a>
+      </p>
+    <% end %>
+
+    <%= yield %>
+
+    <footer>
+      <ul>
+        <li><%= t(".footer.company") %></li>
+        <li><%= link_to t(".footer.faq", :raise => true), "#", :title => t(".footer.faq_title") %></li>
+      </ul>
+    </footer>
+  </body>
+</html>

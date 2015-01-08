@@ -1,0 +1,82 @@
+
+<%= form_for charity, :url => user_charity_path, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= error_group_for(f) do %>
+    <strong>Uh oh!</strong> Looks like there was a problem creating your charity:
+  <% end %>
+
+  <fieldset>
+    <%= render_if_present(charity.persisted? && !charity.active?) do %>
+      <%= policy_alert(user_policy, :basic_information) %>
+    <% end %> 
+    <%= control_group_for(f, :name) do %>
+      <% if charity.persisted? %>
+        <span class="input-large uneditable-input"><%= charity.name %></span>
+      <% else %>
+        <%= f.text_field :name, :placeholder => 'e.g., Alameda Red Cross', :tabindex => autotabindex %>
+      <% end %>
+    <% end %>
+
+    <%= control_group_for(f, :ein) do %>
+      <%= f.text_field :ein, :placeholder => 'e.g., 00-1234567', :tabindex => autotabindex %>
+    <% end %>
+
+    <%= control_group_for(f, :website_url) do %>
+      <%= f.text_field :website_url, :placeholder => 'e.g., www.yourcharity.org', :tabindex => autotabindex %>
+    <% end %>
+
+    <% if charity.persisted? %>
+      <%= render_unless_present(charity.active?) do %>
+        <%= policy_alert(user_policy, :description) %>
+      <% end %>
+      <%= control_group_for(f, :description) do %> 
+        <%= f.text_area :description, :placeholder => 'A description of your charity for donors, e.g., what you do, who you help and the impact you have.', :rows => 3, :class => 'input-block-level', :tabindex => autotabindex %>
+      <% end %>
+
+      <br />
+
+      <%= render_unless_present(charity.active?) do %>
+        <%= policy_alert(user_policy, :picture) %>
+      <% end %>
+      <%= control_group_for(f, :picture) do %>
+        <%= f.file_field :picture %>
+        <%# So carrierwave remembers uploaded images if validations fail %>
+        <%= f.hidden_field :picture_cache %>
+        <span class="help-block"><small>This image is used on your rewards and donate page. <br />Square or landscape pictures work best.</small></span>
+      <% end %>
+    <% else %>
+      <%= f.fields_for(:address) do |address| %>
+        <%= control_group_for(address, :postal_code) do %> 
+          <%= address.text_field :postal_code, :tabindex => autotabindex %>
+        <% end %>
+
+        <%= address.hidden_field :country_code, :value => 'US' %>
+      <% end %>
+    <% end %>
+  </fieldset>
+
+  <% if charity.persisted? %>
+    <fieldset>
+      <legend>Contact Information</legend>
+
+      <%= render_unless_present(charity.active?) do %>
+        <%= policy_alert(user_policy, :contact_information) %>
+      <% end %>
+      <%= control_group_for(f, :email) do %> 
+        <%= f.email_field :email, :placeholder => 'e.g., info@yourcharity.org', :tabindex => autotabindex %>
+      <% end %>
+
+      <%= f.fields_for(:address) do |address| %>
+        <%= render :partial => 'users/addresses/fields', :locals => { :builder => address } %>
+      <% end %>
+    </fieldset>
+  <% end # end persisted? %>
+
+  <br /> 
+
+  <div class="control-group">
+    <div class="controls">
+      <% submit_text = charity.persisted? ? 'Update charity' : 'Create charity' %>
+      <%= f.submit submit_text, :class => 'btn btn-primary', :tabindex => autotabindex %>
+    </div>
+  </div>
+<% end %> 

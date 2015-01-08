@@ -1,0 +1,70 @@
+<div id="main">
+  <div id="loginpage" class="clearfix">
+    <div id="checkout-form">
+      <%= form_for @order, :as => :order, :url => orders_path, :method => :post, :html => { :class => 'submit-once' } do |f| %>
+        <h2>Complete Your Transaction</h2>
+
+        <%= render 'form', :f => f %>
+
+
+        <div class="actions" align="right">
+          <%= render 'authorize_net' %>
+          <h3>Your total giving amount is: <%= donation_amount_all %></h3>
+          <div class="clearfix">
+            <%= f.submit "Give Now", :id => "button" %>
+          </div>
+          <div style="color: #999; width: 300px; line-height: 16px;">After you click "Give Now", you may have to wait on this page for up to one minute for the system to process your certificates.</div>
+        </div>
+      <% end %>
+    </div>
+
+    <div id="checkout-sidebar">
+      <div class="checkout-sidebar-inner">
+        <span class="h3-checkout">Your total giving amount is:</span><br>
+        <span class="h1-sidebar-checkout"><%= donation_amount_all %></span>
+      </div>
+      <% @order_items.each do |charity_id, item| %>
+        <div class="checkout-sidebar-inner">
+          <span class="h2-checkout"><%= charity_donation_amount(charity_id, item[:deals])%></span><br>
+          <span class="h4-checkout">to <%= item[:charity].name %></span><br />
+
+          <div class="checkout-sidebar-item"></div>
+
+          <hr/>
+
+          <span class="h4-checkout">
+            <%= donation_reward_msg(item[:certificates].values.flatten)%>
+          </span>
+          
+          <br/>
+
+          <% item[:certificates].each do |deal_code, deal_certificates| %>
+
+            <% deal_certificates.each do |certificate| %>
+              <div class="checkout-sidebar-item clearfix">
+                <div id="checkout-sidebar-image"><%= image_tag certificate.merchant.picture.url(:small), :class => "clip-image" %></div>
+                <div id="checkout-sidebar-text">
+                  <span class="h3-checkout"><%= certificate.merchant.offer.offer_value.format(:no_cents_if_whole => true)  %> | <%= certificate.merchant.name %></span><br>
+                  <span class="form-text">
+                    <%= certificate.merchant.offer.tagline %> &#149;
+                    Save up to <%= certificate.merchant.offer.discount_rate%>% off any single purchase up to <%=certificate.merchant.offer.offer_cap.format(:no_cents_if_whole => true)%> &#149; 
+                    <%= certificate.merchant.offer.rules %>
+                  </span>
+                </div>
+              </div>
+            <% end %>
+            <hr />
+          <% end %>
+
+        </div>
+      <% end%>
+
+      <div class="checkout-sidebar-inner">
+        <span class="h3-checkout">Additional Rules:</span><br />
+        <span class="form-text">
+          Valid for one visit or purchase, per customer per month. Not valid on sale items, towards gratuity, or in combination with any other offers or discounts. Offer expires 6 months from date of donation. No cash or credit back.
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

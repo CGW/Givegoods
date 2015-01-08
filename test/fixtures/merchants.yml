@@ -1,0 +1,80 @@
+books_inc:
+  id: 1
+  user_id:
+  name: Books Inc.
+  description: The West's Oldest Independent Bookseller
+  website_url: http://www.booksinc.net/
+  picture: booksinc.png
+  created_at: '2012-01-17 16:15:06.345902'
+  updated_at: '2012-01-17 16:15:09.266472'
+  slug: books-inc
+  status: active
+  lat: '37.76364880'
+  lng: '-122.24313030'
+
+sumbody:
+  id: 2
+  user_id:
+  name: Sumbody
+  description: handmade. pure.
+  website_url: http://www.sumbody.com/
+  picture: sumbody.png
+  created_at: '2012-01-17 16:15:06.872264'
+  updated_at: '2012-01-17 16:15:09.672507'
+  slug: sumbody
+  status: active
+  lat: '37.76373070'
+  lng: '-122.24306970'
+
+burma_superstar:
+  user_id:
+  name: Burma Superstar!
+  description: "Indian, Chinese, Laonese, Thailandese, Burmese cuisine."
+  website_url: http://www.burmasuperstar.com
+  picture: burma-superstar.png
+  created_at: '2012-01-17 16:15:07.410347'
+  updated_at: '2012-01-17 16:15:10.050949'
+  slug: burma-superstar
+  status: active
+  lat: '37.83469260'
+  lng: '-122.26303440'
+
+flowers:
+  user:
+  name: Flowers
+  description: John S Towata Flowers
+  website_url: ~
+  picture: flowers.png
+  created_at: 2012-01-17 16:15:08.006358
+  updated_at: 2012-01-17 16:15:10.431434
+  slug: flowers
+  status: active
+  lat: 37.76610190
+  lng: -122.24285000
+
+blue_dot_cafe:
+  user_id:
+  name: Blue Dot Cafe
+  description: "Cafe & coffee bar"
+  website_url: http://bluedotcafeandcoffeebar.com/
+  picture: blue-dot-cafe.png
+  created_at: '2012-01-17 16:15:08.774922'
+  updated_at: '2012-01-17 16:15:10.802287'
+  slug: blue-dot-cafe
+  status: active
+  lat: '37.76673400'
+  lng: '-122.25430200'
+
+powerplant:
+  id: 6
+  user_id: 1
+  name: Powerplant LLC
+  description: Atomic Powerplant in a beautiful location.
+  website_url: http://powerplant.example.com/
+  picture: powerplant.png
+  created_at: <%= 5.days.ago.to_s :db %>
+  updated_at: <%= 5.days.ago.to_s :db %>
+  slug: powerplant
+  status: active
+  lat: '37.76673400'
+  lng: '-122.25430200'

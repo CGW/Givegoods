@@ -1,0 +1,30 @@
+<% if @merchant %>
+
+  <% content_for :grid_header do %>
+    <div id="grid-header-help">
+      <h1><%= @merchant.name %> directly supports all the charities shown below</h1>
+      <ul>
+        <li><%= image_tag 'grid/header-help-number1.png' %>Choose a charity.</li>
+        <li><%= image_tag 'grid/header-help-number2.png' %>Make a donation.</li>
+        <li><%= image_tag 'grid/header-help-number3.png' %>Save at the merchant.</li>
+      </ul>
+    </div>
+  <% end %>
+  
+  <% content_for :grid_left do %>
+    <%= render :partial => 'merchants/grid_info', :locals => { :merchant => @merchant } %> 
+  <% end %>
+
+<% else %>
+
+  <% content_for :grid_header do %>
+    <h1>Charities</h1>
+  <% end %>
+
+  <% content_for :grid_left do %>
+    <%= render "grid_controls" %>
+  <% end %>
+
+<% end %>
+
+<%= render :partial => "charities/index", :locals => { :charities => @charities, :merchant => @merchant } %>

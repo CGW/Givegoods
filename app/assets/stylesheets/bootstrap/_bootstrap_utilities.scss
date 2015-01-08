@@ -1,0 +1,126 @@
+.row-small {
+  margin-left: $gridGutterWidth / 2 * -1;
+  @include clearfix();
+
+  > [class*="span"] {
+    float: left;
+    min-height: 1px; // prevent collapsing columns
+    margin-left: $gridGutterWidth / 2;
+  }
+}
+
+.invisible-well {
+  min-height: 20px;
+  padding: 20px;
+}
+
+.invisible-well-large {
+  padding: 20px;
+}
+
+.invisible-well-small {
+  padding: 9px;
+}
+
+.float-middle {
+  margin: 0 auto;
+}
+
+.center {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.small {
+  font-size: 85%;
+}
+
+@mixin font-family-helvetica {
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+// *************************************************************************
+// rails fixes
+.field_with_errors {
+  display: inline;
+}
+
+// Rails default form builder wraps our label in this class; lets make sure
+// the color matches
+.field_with_errors label {
+  color: $errorText;
+}
+
+// *************************************************************************
+// bootstrap-sass fixes
+
+.form-horizontal {
+  .controls {
+    // Fix IE7 controls display; default uses inline-block which is broken.
+    // Oddly enough, there's mixins available to fix the problem.
+    @include ie7-inline-block;
+    @include ie7-restore-left-whitespace;
+  }
+}
+
+// Fixes help-inline not lining up vertically with input elements when not
+// using form-horizontal/inline
+.help-inline {
+  margin-bottom: 10px;
+}
+
+.help-block {
+  margin-top: -5px;
+}
+
+// *************************************************************************
+// These are all missing from the bootstrap-sass gem. Please re-evalulate
+// where they are needed before editing or adding further definitions.
+.btn-block {
+  display: block;
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.btn-block + .btn-block {
+  margin-top: 5px;
+}
+
+input[type="submit"].btn-block,
+input[type="reset"].btn-block,
+input[type="button"].btn-block {
+  width: 100%;
+}
+
+.text-error {
+  color: $errorText;
+}
+
+.text-warning {
+  color: $warningText;
+}
+
+// *************************************************************************
+// Add btn-pink
+.btn-pink, .btn-pink:hover {
+  color: $white;
+  border: none;
+}
+// Provide *some* extra contrast for those who can get it
+.btn-pink.active {
+  color: rgba(255,255,255,.75);
+}
+
+.btn-pink {
+  @include buttonBackground($pink, $pink, $white, none);
+  font-size: 16px;
+  font-weight: 400;
+  padding: 14px 10px;
+}

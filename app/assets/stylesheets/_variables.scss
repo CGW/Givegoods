@@ -1,0 +1,40 @@
+// NOTE: Trying to phase this file out. If it can be shared, put it in the
+// import file below.
+
+// Same colors as bootstrap
+@import "bootstrap/bootstrap_variables";
+
+$baseFontSize: 14px;
+
+// certificate background image dimensions
+$certificate-bg-width: 600px;
+$certificate-bg-height: 646px;
+
+@mixin content-container {
+  max-width: 960px;
+  width: auto;
+  margin: 0px auto;
+  background-color: transparent;
+}
+
+@mixin font-family-muli($font-weight:"300") {
+  font-family: Muli, sans-serif;
+  font-weight: #{$font-weight};
+}
+
+@mixin font-family-default {
+  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+@mixin hide-overflow($marker:"ellipsis") {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin rounded-corners($radius:"3") {
+  -moz-border-radius: #{$radius + "px"};    // firefox
+  -webkit-border-radius: #{$radius + "px"}; // safari/chrome
+  border-radius: #{$radius + "px"};         // CSS3, works in IE9
+}

@@ -1,0 +1,12 @@
+<%= render :file => "charities/index" %>
+
+<% content_for :javascript do %>
+  <script type='text/javascript'>
+    $(function() {
+      if($("#<%= dom_id(@charity) %>").length > 0) {
+        $.scrollTo("#<%= dom_id(@charity) %>", 100);
+      }
+      <%= render partial: "shared/grid/new", formats: [:js] %>
+    });
+  </script>
+<% end %>

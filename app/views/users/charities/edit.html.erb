@@ -1,0 +1,11 @@
+<div class="page-header"> 
+  <h1><%= @charity.active? || user_policy.active? ? 'Edit charity profile' : 'Almost Finished' %></h1> 
+</div> 
+
+<%= render_unless_present(@charity.active? || user_policy.active?) do %>
+  <p>You must complete a few pieces of information below before your charity page can go live.</p> 
+<% end %> 
+
+<br />
+
+<%= render :partial => 'form', :locals => { :charity => @charity } %>

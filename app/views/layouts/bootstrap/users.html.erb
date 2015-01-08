@@ -1,0 +1,25 @@
+<% content_for(:content) do %>
+  <% if current_user.role == 'merchant' %> 
+    <%= render :partial => 'layouts/bootstrap/users/merchant_messages' %>
+  <% elsif current_user.role == 'charity' %>
+    <%= render :partial => 'layouts/bootstrap/users/charity_messages' %>
+  <% end %>
+  <div class="row user-settings">
+    <div class="span3 user-settings-nav">
+      <% if current_user.role == 'charity' %>
+        <%= render :partial => 'layouts/bootstrap/users/charity_menu' %>
+      <% elsif current_user.role == 'merchant' %>
+        <%= render :partial => 'layouts/bootstrap/users/merchant_menu' %>
+      <% else %>
+        <%= render :partial => 'layouts/bootstrap/users/no_role_menu' %>
+      <% end %>
+    </div>
+    
+    <div class="span8 pull-right user-settings-content">
+      <%= yield %>
+    </div>
+  </div>
+
+<% end %>
+
+<%= render :template => 'layouts/bootstrap/application' %>

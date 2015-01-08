@@ -1,0 +1,10 @@
+homer:
+  id: 1
+  first_name: 'Homer'
+  last_name: 'Simpson'
+  email: homer@simpson.com
+  # password: "sanfran415:paragon"
+  confirmed_at: <%= 5.days.ago.to_s :db %>
+  encrypted_password: $2a$10$NuhJ171d/iogcjaSOti1ueOBFBDNf8CYMps8t2hAP1cCj4yMrgLDW
+  created_at: <%= 5.days.ago.to_s :db %>
+  updated_at: <%= 5.days.ago.to_s :db %>

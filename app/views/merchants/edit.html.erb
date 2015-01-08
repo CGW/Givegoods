@@ -1,0 +1,18 @@
+<% body_options :class => "tan" %>
+
+<div id="main">
+
+<%- unless @merchant.active? %>
+  <div class="notactive">
+Your merchant account is being reviewed. In the meantime, make sure you have all the correct information in your merchant profile and reward settings. We will approve your account or contact you within the next 24 hours.
+  </div>
+<% end %>
+
+  <%= render "shared/admin/navigation", :selected => :edit_merchant %>
+  <div id="merch-adminnav-content">
+    <h2>Merchant Profile</h2>
+      <hr>
+      <%= render 'form' %>
+  </div>
+</div>
+<div class="clear"></div>

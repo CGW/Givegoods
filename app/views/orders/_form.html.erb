@@ -1,0 +1,97 @@
+<span class="errors"><%= order_errors %></span>
+
+<hr />
+
+<div class="form-row">
+  <span class="form-text" style="color:#1DAAEC">
+    <%= f.check_box :with_additional_donation_amount, :id => "with-additional-donation-amount", :checked => true %>
+    Yes, I'd like to make an additional tax-deductible donation.
+  </span>
+</div>
+
+<div class='clearfix'>
+  <%= render "extra_donations" %>
+
+  <%= fields_for :credit_card, @credit_card do |cc| %>
+      <div class="form-row">
+        <span class="form-label"><%= cc.label :type, "Card Type:" %></span>
+        <span class="form-field"><%= cc.select :type, MerchantSidekick::default_gateway.supported_cardtypes.map {|t| ["#{t}".titleize, t]}, {}, {:class => "selectInput"} %></span>
+      </div>
+
+      <div class="form-row">
+        <span class="form-label"><%= cc.label :number, "Card Number:" %></span>
+        <span class="form-field"><%= cc.text_field :number, :size=>"30", :class =>'textInput' %></span>
+      </div>
+
+      <div class="form-row">
+        <span class="form-label"><%= cc.label :year, "Expiration:" %></span>
+        <span class="form-field"><%= cc.select :month, (1..12).collect{ |n| ["#{n} - #{I18n.t('date.month_names')[n]}", n] }, {}, {:class => "selectInput"} %><%= cc.select :year, Date.today.year..Date.today.year+5, {}, {:class => "selectInput"} %></span>
+      </div>
+
+      <div class="form-row">
+        <span class="form-label"><%= cc.label :verification_value, "CVC Code:" %></span>
+        <span class="form-field"><%= cc.text_field :verification_value, :size=>"3", :class =>'textInput' %></span>
+      </div>
+  <% end %>
+
+  <%= fields_for :customer do |cu| %>
+    <div class="form-row">
+      <span class="form-label"><%= cu.label :first_name, "First Name:" %></span>
+      <span class="form-field"><%= cu.text_field :first_name, :size=>"30", :class =>'textInput' %></span>
+    </div>
+
+    <div class="form-row">
+      <span class="form-label"><%= cu.label :last_name, "Last Name:"%></span>
+      <span class="form-field"><%= cu.text_field :last_name, :class =>'textInput' %></span>
+    </div>
+
+    <%= cu.fields_for :billing_address_attributes, @customer.billing_address do |ba| %>
+      <div class="form-row">
+        <span class="form-label"><%= ba.label :street, "Street Address:" %></span>
+        <span class="form-field"><%= ba.text_field :street, :class =>'textInput' %></span>
+      </div>
+      <div class="form-row">
+        <span class="form-label"><%= ba.label :city, "City:" %></span>
+        <span class="form-field"><%= ba.text_field :city, :class =>'textInput' %></span>
+      </div>
+      <div class="form-row">
+        <span class="form-label"><%= ba.label :state_code, "State:" %></span>
+        <span class="form-field">
+          <%= ba.select :state_code, Region.all.collect {|r| [r.name, r.code]}, { :include_blank => true }, {:class => "selectInput"}%>
+        </span>
+      </div>
+      <div class="form-row">
+        <span class="form-label"><%= ba.label :postal_code, "Postal Code:" %></span>
+        <span class="form-field"><%= ba.text_field :postal_code, :class =>'textInput' %></span>
+      </div>
+      <div class="form-row">
+        <span class="form-label"><%= cu.label :email, "Email Address:" %></span>
+        <span class="form-field"><%= cu.text_field :email, :class =>'textInput' %></span>
+      </div>
+      <div id="clear"></div>
+    <% end %>
+  <% end %>
+
+  <div class="form-row"></div>
+
+  <hr />
+
+  <%= fields_for :certificate, @certificate_group_opts do |cu| %>
+    <span class="form-text">
+      <%= cu.check_box :communicate_with_charity, :checked => true %>
+      <%=emails_from_charity_label(@charities)%>
+    </span><br>
+  <% end %>
+
+    <%= fields_for :customer do |cu| %>
+      <%= cu.check_box :terms %>
+      <span class="form-text">
+        <%= cu.label :terms do %>
+          I agree to the <%= link_to "Terms and Conditions", page_path('terms-and-conditions'), :target => '_blank' %>. I acknowledge that I cannot receive a tax-deduction for the dollars I redeem in merchant rewards.
+        <% end %>
+      </span><br>
+
+    <% end %>
+
+    <hr />
+</div>

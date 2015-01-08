@@ -1,0 +1,23 @@
+// colors
+$blackSoft: #111;
+$charcoal: #494949;
+$electricBlue: #00A5D6;
+$maroon: #61202d;
+$orange: #c46351;
+$pink: #A51B45;
+$tan: #F6F3EE;
+$tanDark: #E6E3DD;
+$tanDarker: #C7C5C1;
+$yellowSoft: #FFFAEA;
+$greenPastel: #EDF6ED;
+
+// misc
+$footerHatHeight: 10px;
+
+// alter bootstrap defaults
+$bodyBackground: $tan;
+
+$linkColor: $electricBlue;
+
+$btnPrimaryBackground: darken($electricBlue, 5%);
+$btnPrimaryBackgroundHighlight: lighten($btnPrimaryBackground, 5%);

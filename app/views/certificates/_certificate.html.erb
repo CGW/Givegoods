@@ -1,0 +1,52 @@
+<div class="certificate-print">
+  <div class="body">
+    <div class="code">
+      <%= image_tag "https://chart.googleapis.com/chart?cht=qr&chl=#{certificate.code}&chs=125x125&chld=L|0" %>
+      <div class="text"><%= certificate.code %></div>
+    </div>
+
+    <div class="headers">
+      <h2><%= certificate.offer_value.format(:no_cents_if_whole => true) %></h2>
+      <h3><%= certificate.merchant.name %></h3>
+    </div>
+
+    <div class="tagline">
+      <%= certificate.tagline %>
+    </div>
+
+    <div class="description">
+      Get <%= certificate.offer_value.format(:no_cents_if_whole => true) %> when you spend <%= certificate.offer_cap.format(:no_cents_if_whole => true) %>,
+      <br /> 
+      or take <%= certificate.discount_rate %>% off smaller purchases.
+    </div>
+
+    <div class="address">
+      <%= certificate.merchant.address.street %>
+      <br />
+      <%= certificate.merchant.address.city %>, <%= certificate.merchant.address.state.code %>
+      <br />
+      <%= certificate.merchant.website_host %>
+    </div>
+
+    <div class="thanks">
+      Thank you for supporting
+      <br />
+      <%= certificate.charity.name %>
+    </div>
+
+    <div class="purchase-date">
+      This certificate was purchased on <%= certificate.created_at.strftime('%m-%d-%Y') %>
+    </div>
+
+    <div class="background">
+      <%= image_tag "certificate-logo.png" %>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="rules">
+      <%= certificate.rules %>
+      Valid for one visit or purchase, per customer per month. Not valid on sale items, towards gratuity, or in combination with any other offers or discounts. Offer expires 6 months from date of donation. No cash or credit back.
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+// -----------------
+// footer
+
+// html and body must be 100%
+html, body {
+  height: 100%;
+}
+
+// wrapper must be around elements you want to push down to beneath the
+// footer-hat
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto ($footerHatHeight * -1);
+}
+
+// push must reside as the last element in wrapper and match the same height
+// as the footer-hat
+.push, .footer-hat-wrapper {
+  height: $footerHatHeight;
+}
+
+.footer-hat-wrapper {
+  background-color: $electricBlue;
+}
+
+.footer-hat {
+  line-height: $footerHatHeight;
+  color: #EEE;
+}
+
+// footer
+.footer-wrapper {
+  background-color: #000;
+}
+
+.footer {
+  color: #999;
+  line-height: 1.35em;
+}
+
+.footer-right {
+  float: right;
+  width: 150px;
+}
+
+.footer-left {
+  float: left;
+  width: 500px;
+}
+
+.footer-right, .footer-left {
+  padding: 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .footer-left {
+    width: auto;
+    clear: both;
+  }
+
+  .footer-right {
+    width: 100px;
+    float: left;
+  }
+}
+

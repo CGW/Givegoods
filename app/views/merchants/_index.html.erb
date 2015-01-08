@@ -1,0 +1,34 @@
+<% charity ||= nil %>
+<% bundles ||= nil %>
+
+<% content_for :grid_right do %>
+  <% if charity.present? and bundles.present? %>
+    <div class="card-group card-group-bundles clearfix">
+      <div class="card-category">
+        <% if charity.campaign_bundle_tagline.present? %>
+          <%= charity.campaign_bundle_tagline %>
+        <% else %> 
+          Limited Time Only: Exclusive Reward Packages
+        <% end %>
+      </div>
+
+      <%= render :partial => 'bundles/bundle', :collection => bundles, :locals => { :charity => charity } %>
+    </div>
+  <% end %>
+
+  <% if merchants.count > 0 %>
+    <div class="card-group card-group-singles clearfix">
+      <% if charity.present? and bundles.present? %>
+        <div class="card-category">
+          Choose Individual Rewards
+        </div>
+      <% end %>
+      <%= render :partial => "merchant", :collection => merchants, :locals => { :charity => charity } %>
+    </div>
+  <% else %>
+    <br />
+    <p align="center">Sorry! We couldn't find any merchants that matched your request.</p>
+  <% end %>
+<% end %>
+
+<%= render "shared/grid/index" %>

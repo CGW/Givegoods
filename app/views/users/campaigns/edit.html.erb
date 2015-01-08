@@ -1,0 +1,18 @@
+<div class="page-header"> 
+  <h1>Donation page</h1> 
+</div> 
+
+<p>Personalize your donation page for your donors. Customize suggested
+donation amounts and add a message about the impact that specific donation
+makes.</p> 
+
+<%= render_if_present(@charity.active?) do %>
+  <p>
+  Your donation page can always be found at:<br />
+  <%= link_to charity_campaign_default_url(@charity, @campaign.slug), charity_campaign_default_path(@charity, @campaign.slug), :"data-popup" => true %>
+  </p>
+<% end %>
+
+<br />
+
+<%= render :partial => 'form', :locals => { :campaign => @campaign } %>

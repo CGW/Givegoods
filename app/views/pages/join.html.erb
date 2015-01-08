@@ -1,0 +1,128 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123007814447412";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
+
+<style type="text/css">
+
+  .thick {
+    font-size: 100px;
+    font-weight: bold;
+    margin: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #777;
+    text-align: center;
+    letter-spacing: -5px;
+    width: 100%;
+  }
+
+  p { 
+    line-height: 1.35em;
+  }
+
+  .grid-item {
+    width: 250px;
+    float: left;
+    padding: 20px;
+    margin-left: 5px;
+    text-align: center;
+  }
+
+  .grid-item h1 {
+    margin: 12px 0;
+    font-size: 48px;
+    line-height: 1em;
+  }
+
+  .grid-item-banner {
+    height: 75px;
+    position: relative;
+  }
+
+  .grid-item-banner div {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+
+  #mc_embed_signup {
+    margin: 12px 24px;
+    text-align: left;
+  }
+  #mc_embed_signup input {
+    margin: 0;
+  }
+
+</style>
+
+<body class="tan">
+  <div id="main">
+    <div id="loginpage" class="clearfix">
+      <div class="thick">Join our community.</div>
+
+      <div class="grid-item">
+        <div class="grid-item-banner">
+          <div>
+            <%= image_tag('merchant1.png') %>
+          </div> 
+        </div>
+        <h1>Merchants</h1>
+        <p>
+        <%= link_to 'Create an account', new_user_registration_path %>, 
+        <%= link_to "sign in", new_user_session_path %>, <br />
+        or <%= link_to 'learn more', page_path('merchant_info') %>.
+        </p>
+      </div>
+
+      <div class="grid-item">
+        <div class="grid-item-banner">
+          <div>
+            <%= image_tag ('charity1.png') %>
+          </div>
+        </div>
+        <h1>Charities</h1>
+        <p>
+        <%= link_to 'Create an account', new_user_registration_path %>, 
+        <%= link_to "sign in", new_user_session_path %>, <br />
+        or <%= link_to 'learn more', page_path('charity_info') %>.
+        </p>
+      </div>
+
+      <div class="grid-item">
+        <div class="grid-item-banner">
+          <div>
+            <%= image_tag('donor.png') %>
+          </div>
+        </div>
+        <h1>Donors</h1>
+        <p>I want to hear about new, exclusive rewards from Givegoods.</p>
+        <div id="mc_embed_signup">
+          <form action="http://givegoods.us5.list-manage.com/subscribe/post?u=7c5e5ee7284b5e47e4aa4db95&amp;id=8a3e5576c4" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+            <input style="width:100px;" type="email" value="" name="EMAIL" class="email textInput" id="mce-EMAIL" placeholder="email address" required />
+            <input type="submit" value="Sign Up" name="subscribe" id="mc-embedded-subscribe" class="button" />
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>

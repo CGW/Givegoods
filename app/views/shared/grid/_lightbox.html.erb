@@ -1,0 +1,73 @@
+<div id="lightbox">
+  <div id="lightbox-inner">
+    <div class="lightbox-close">
+      <a href="javascript:void(0)" onclick="document.getElementById('lightbox').style.display='none';">
+        &times;
+      </a>
+    </div>
+
+    <h1 class="h1-lightbox">About This Reward:</h1>
+    <div id="lightbox-inner-content" class="clearfix">
+      <% if @merchant.available_certificates? %>
+        <div class="clearfix">
+          <div class="lightbox-image">
+            <%= image_tag @charity.picture.url(:grid), :class => 'clip-image' %>
+          </div>
+
+          <div class="lightbox-text">
+            <%= form_for :deal, :url => charity_merchant_deals_path(@charity, @merchant), :remote => true do |f| %>
+              <%= hidden_field_tag :return_to_merchants, params[:controller] == 'charities' %>
+              <%= submit_tag "Add to cart", :id => 'button' %>
+            <% end %>
+
+            <div class="h3-lightbox">
+              When you give
+              <br />
+              <span class="big-lightbox">
+                <%= @merchant.offer.donation_value.format(:no_cents_if_whole => true) %>
+              </span>
+              <br  />
+              to <%= @charity.name %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="h5-lightbox">
+          <%= "Whoa! This merchant has already met their monthly rewards goal for %s. Please come back in %s." % [l(Time.zone.now, :format => "%B"), l(Time.zone.now + 1.month, :format => "%B")] %>
+        </div>
+      <% end %>
+
+      <hr />
+
+      <div class="clearfix">
+        <div class="lightbox-image">
+          <%= image_tag @merchant.picture.url(:grid), :class => "clip-image" %>
+  
+          <p class="h5-lightbox">
+          <%= @merchant.name %> &#149; <%= @merchant.address.street %> <%= @merchant.city_and_state %> 
+          <br> 
+          <a target="blank" href="http://maps.google.com/?q=<%= @merchant.address.street %> <%= @merchant.city_and_state %>">View Map</a>
+          &#149; <a target="blank" href="<%= @merchant.website_url %>">Visit Website</a>
+          </p>
+        </div>
+  
+        <div class="lightbox-text">
+          <div class="h3-lightbox">
+            <span class="big-lightbox">
+              Save up to <%= @merchant.offer.offer_value.format(:no_cents_if_whole => true) %>
+            </span>
+          </div>
+          at <%= @merchant.name %>
+          <span class="p-lightbox">
+            <p><%= @merchant.offer.tagline %></p>
+          </span>
+  
+          <span class="h5-lightbox">
+            <% if @merchant.offer.any_cap? %><p>Offer valid for <%= @merchant.offer.discount_rate %>% off any single purchase up to <%= @merchant.offer.offer_cap.format(:no_cents_if_whole => true) %>. <% end %><%= @merchant.offer.rules %></p>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

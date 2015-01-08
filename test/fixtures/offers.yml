@@ -1,0 +1,64 @@
+books_inc:
+  merchant_id: 1
+  rules: Not valid for educational events and classes.
+  currency: USD
+  status: active
+  charity_id:
+  max_certificates: <%= Offer::MAX_CERTIFICATES[0] %>
+  offer_cap_cents: 3000
+  discount_rate: <%= Offer::DISCOUNT_RATES[Random.rand(Offer::DISCOUNT_RATES.size)] %>
+  rules: Not valid on Paulo Coelho books.
+  tagline: Cheap books!
+
+sumbody:
+  merchant_id: 2
+  rules: Not valid for use with Spa discounts.
+  offer_cap_cents: 5000
+  discount_rate: <%= Offer::DISCOUNT_RATES[Random.rand(Offer::DISCOUNT_RATES.size)] %>
+  currency: USD
+  status: active
+  charity_id:
+
+burma_superstar:
+  merchant: burma_superstar
+  rules: Not valid for all-you-can-eat offers.
+  offer_cap_cents: 2500
+  discount_rate: <%= Offer::DISCOUNT_RATES[Random.rand(Offer::DISCOUNT_RATES.size)] %>
+  currency: USD
+  status: active
+  charity:
+  max_certificates: <%= Offer::MAX_CERTIFICATES[0] %>
+
+flowers:
+  merchant_id: 4
+  merchant: flowers
+  offer_cap_cents: 2500
+  discount_rate: <%= Offer::DISCOUNT_RATES[Random.rand(Offer::DISCOUNT_RATES.size)] %>
+  rules: Not valid for roses.
+  currency:
+  status: paused
+  charity:
+
+blue_dot_cafe:
+  merchant: blue_dot_cafe
+  rules: Not valid for Espressos.
+  currency: USD
+  status: active
+  charity:
+  offer_cap_cents: 50000
+  discount_rate: <%= Offer::DISCOUNT_RATES[1] %>
+  tagline: "Blue Dot Cafe is the best"
+  rules: "These are the rules"
+  max_certificates: <%= Offer::MAX_CERTIFICATES[0] %>
+
+powerplant:
+  merchant_id: 6
+  rules: Not valid for Plutonium.
+  currency: USD
+  status: active
+  charity_id:
+  max_certificates: <%= Offer::MAX_CERTIFICATES[0] %>
+  offer_cap_cents: 3000
+  discount_rate: <%= Offer::DISCOUNT_RATES[Random.rand(Offer::DISCOUNT_RATES.size)] %>
+  rules: "Valid only for 500 kilowatt hours or more"
+  tagline: "We got the power!"

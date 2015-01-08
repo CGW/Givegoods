@@ -1,0 +1,25 @@
+<div class="footer">
+  <div class="footer-left">
+    <h3>Welcome to Givegoods</h3>
+    <p>We believe every charitable gift should be rewarded. </p>
+    <p>Givegoods allows donors to receive community rewards every time they donate. By enabling charities to offer rewards from local businesses in exchange for donations, Givegoods provides a tangible way for local communities to thrive together.</p>
+    <p>Our team is composed of entrepreneurs who have added strategic value to startups, non-profits and Fortune 500 companies. Want to learn more? We'd love to hear from you so feel free to <%= mail_to "info@givegoods.org", "send us an email" %>.</p>
+    <p>&#169; 2012 Givegoods</p>
+  </div>
+  <div class="footer-right">
+    <h3>Links</h3>
+    <%= link_to "Press", page_path('about', :anchor => "press") %><br>
+    <%= link_to "About", page_path('about')  %><br>
+    <%= link_to "Join", page_path('join')  %><br>
+    <%= link_to "Contact", page_path('about', :anchor => "contact") %><br>
+    <%= link_to "Team", page_path('about', :anchor => "team") %><br>
+  </div>
+  <div class="footer-right">
+    <h3>Credits</h3>
+    <p>Incubated by <br><a target="_new" href="http://subtxt.us">SUBTXT</a><br></p>
+    <p>Illustration by <br><a target="_new" href="http://www.holzheid.com/">Christiane Holzheid</a></p>
+  </div>
+  <%# TODO: Remove me. This line is unnecessary in bootstrap; div.container %>
+  <div class="clear"></div>
+</div>
+

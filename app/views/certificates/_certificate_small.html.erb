@@ -1,0 +1,8 @@
+<div class="certificate-small clearfix">
+  <h2 class="bold"><%= certificate.offer_value.format(:no_cents_if_whole => true) %></h2>
+  <div class="merchant">
+    <div class="merchant-name bold"><%= certificate.merchant.name %></div>
+    <p class="merchant-tagline"><%= certificate.tagline %></p>
+    <p><%= link_to 'Print Certificate', print_certificate_path(certificate) %></p>
+  </div>
+</div>

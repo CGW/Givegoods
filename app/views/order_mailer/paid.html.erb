@@ -1,0 +1,100 @@
+<style type="text/css">
+
+html, body {
+  font-family: "HelveticaNeue", "Helvetica Neue", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  margin:0;
+  padding:0;
+  height: 100%;
+  background-color: #F6F3EE;
+}
+
+#emailbody_outer {
+width: 600px;
+margin: 0px auto;
+background-color: #FFF;
+}
+
+#emailbody_inner {
+padding: 40px;
+}
+
+.email-h0 {
+font-size: 36px;
+letter-spacing: -1px;
+font-weight: bold;
+}
+
+.email-h1 {
+font-size: 24px;
+letter-spacing: -1px;
+font-weight: bold;
+}
+
+p {
+font-size: 14px;
+}
+
+.p-small {
+font-size: 12px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  border-bottom: 4px #F6F3EE solid;
+}
+
+</style>
+
+<div id="emailbody_outer">
+<div id="emailbody_inner">
+
+<span class="email-h1">Thank you,</span><br>
+<span class="email-h0"><%= @order.buyer.first_name %>.</span>
+
+<br>
+<br>
+<hr>
+
+<p>You have made the following charitable <%= "gift".pluralize(@charities.size) %>:</p>
+<% @charities.each do |charity| %>
+ <p><strong>$<%= @order.charity_donation_total(charity) %> to <%= charity.name %></strong></p>
+<% end %>
+
+<hr />
+
+<% if @certificates.present? %> 
+
+  <p>About Your Tax Deductions and Rewards:</p>
+  <p>Per federal law, you are entitled to received a tax-deduction for the entire amount of your donation, less any value you choose to redeem from merchant rewards below.</p>
+
+  <hr />
+
+  <p>You have received rewards from <%= @merchants.size > 1 ? "these" : "this" %> <%= "merchant".pluralize(@merchants.size) %>:
+    <% @certificates.each do |certificate| %>
+      <p><strong><%= certificate.merchant.name %></strong><br><a href="<%= print_certificate_url(certificate) %>">Print certificate</a></p>
+    <% end %>
+  </p>
+
+<% else %>
+  <p>About Your Tax Deductions:</p>
+  <p>Per federal law, you are entitled to received a tax-deduction for the entire amount of your donation.</p>
+<% end %>
+
+<hr />
+
+<p>Sincerely,<br>
+<img src="http://www.givegoods.org/assets/givegoods_logo-raster-black-small.png"></p>
+
+</div>
+
+<div align="center" style="width:100%; border-bottom: 30px solid #0098B1"><img src="http://www.givegoods.org/assets/pusteblume_blue.png"></div>
+
+<div align="center" style="width:100%; background-color: #0098B1; color: #F6F3EE; font-size: 12px; padding-top:10px; padding-bottom:30px;">
+Givegoods  |  1516 Oak St. Alameda 94501  |  <a style="color:#FFF" href="info@givegoods.org">info@givegoods.org</a>
+</div>
+
+</div>
+</body>
+</html>
+

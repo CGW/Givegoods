@@ -1,0 +1,245 @@
+@import "bootstrap_variables";
+@import "bootstrap";
+@import "bootstrap_utilities";
+
+$greenLight: #88CD46;
+$grayBg: #F2F1F3;
+$graySlate: #EAE9EA;
+$blueTeal: #0F8FBF;
+$blueNavy: #05526F;
+
+body {
+  background-color: $grayBg;
+}
+
+.campaign {
+  .spanLeft, .spanRight {
+    margin-left: 10px;
+  }
+
+  .spanLeft {
+    width: 646px;
+  }
+
+  .spanRight {
+    width: 280px;
+  }
+}
+
+.campaign-banner {
+  background-color: $charcoal;
+  padding: 10px;
+  vertical-align: middle;
+
+  h5 {
+    @include text-overflow;
+    margin: 0;
+    color: $white;
+    line-height: 36px;
+    font-weight: normal;
+  }
+
+  .btn {
+    display: block;
+    text-align: left;
+    background-image: image-url('icons/gift.png');
+    background-repeat: no-repeat;
+    background-position: 12px 6px;
+    background-image: image-url('icons/gift.png');
+    background-repeat: no-repeat;
+    padding: 0px 0px 0px 38px;
+    line-height: 36px;
+  }
+}
+
+.campaign-main {
+  h1, h4, h5, h3 {
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .well, .well-small {
+    @include border-radius(9px); 
+    margin: 3px;
+    background-color: $white;
+    border: 1px solid darken($graySlate, 5%);
+  }
+}
+
+.campaign-amount {
+  background-color: $blueTeal;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid $blueNavy;
+
+  h4 {
+    margin-bottom: 10px;
+  }
+
+  .control-group {
+    margin-bottom: 0;
+  }
+
+  .campaign-content {
+    border-color: $blueNavy;
+    background-color: $blueNavy;
+
+    .well, .well-small {
+      border-color: $blueNavy;
+    }
+  }
+}
+
+@mixin campaign-column {
+  background-color: $graySlate;
+  @include border-radius(12px); 
+  border: 1px solid darken($graySlate, 5%);
+  margin-bottom: 20px;
+}
+
+.campaign-header {
+  text-align: center;
+  color: $blueTeal;
+  letter-spacing: -1px;
+
+  .invisible-well {
+    margin-bottom: 0px;
+  }
+}
+
+.campaign-content {
+  @include campaign-column;
+
+  form { 
+    margin-bottom: 0;
+  }
+
+  label {
+    font-size: 12px;
+    margin-bottom: 0px;
+  }
+
+  .form-amount {
+    input[type="text"], .add-on, .btn {
+      font-size: 14px; 
+      font-weight: 300;
+    }
+
+    input[type="text"] {
+      padding: 9px;
+      text-align: right;
+      width: 100px;
+    }
+
+    .add-on {
+      padding: 9px 4px;
+    }
+
+    .btn {
+      width: 80px;
+    }
+  }
+
+  h4 {
+    color: $blueNavy;
+  }
+
+  hr {
+    border-width: 1px 0 0 0;
+    border-color: $graySlate;
+    margin: 15px -20px;
+  }
+
+  .btn-tier {
+    @include buttonBackground(lighten($blueTeal, 5%), $blueTeal, $white, none);
+    font-size: 24px;
+    line-height: 30px;
+    width: 100px;
+    padding-left: 4px;
+    padding-right: 6px;
+  }
+
+  .btn-active {
+    $buttonGreen: lighten($green, 15%);
+    @include buttonBackground($buttonGreen, $buttonGreen, $white, none);
+    border-color: darken($buttonGreen, 15%) $buttonGreen $buttonGreen;
+  }
+
+  .campaign-tier-description {
+    font-size: 12px;
+    color: $blueTeal;
+    line-height: 40px;
+    @include text-overflow;
+  }
+
+  .campaign-credit-cards {
+    margin-top: -6px;
+  }
+
+  .campaign-security {
+    margin-left: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    strong {
+      color: $grayDark;
+    }
+  }
+
+  .submit {
+    width: 300px;
+    input[type="checkbox"] {
+      float: none;
+      margin-top: -3px;
+    }
+  }
+
+  .form-split {
+    width: 47%;
+  }
+}
+
+.campaign-side {
+  @include campaign-column;
+
+  font-size: 12px;
+
+  address, p {
+    line-height: 16px;
+  }
+
+  img {
+    @include size(260px, 260px);
+    margin-bottom: 20px;
+  }
+
+  .donation-stats {
+    margin-bottom: 10px;
+  }
+
+  h3, h5, h6 {
+    margin: 0;
+  }
+  h3 {
+    line-height: 30px;
+  }
+
+
+  .donation-stats { 
+    .pull-left {
+      width: 55%;
+    }
+
+    .pull-right {
+      width: 45%;
+    }
+  }
+}
+
+.campaign-error {
+  border-color: $errorBorder;
+  background-color: $errorBackground;
+
+  .well, .well-small {
+    border-color: $errorBorder;
+  }
+}

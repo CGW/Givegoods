@@ -1,0 +1,52 @@
+<div id="lightbox">
+  <div id="bundle_lightbox_inner">
+
+    <div id="bundle_lightbox_top">
+      <a href = "javascript:void(0)" onclick = "document.getElementById('lightbox').style.display='none';"><span class="bundle_close">&times</span></a>
+      <h2>Here's The Deal</h2>
+    </div>
+
+    <div id="bundle_get" style="overflow: auto">
+      <div id="scroller">
+        <h2>&darr; You get all the rewards below&#133; </h2>
+        <hr>
+        <%- @bundle.offers.each do |offer| %>
+          <div id="bundle_get_offer">
+          <div id="bundle_lightbox_image">
+            <%= image_tag offer.merchant.picture.url(:grid), :class => "bundle_lightbox_img_size" %><br>
+            <%= offer.merchant.city_and_state %><br>
+            <a target="blank" href="http://maps.google.com/?q=<%= offer.merchant.address.street %> <%= offer.merchant.city_and_state %>">View Location on Map</a><br>
+          </div>
+
+          <div id="bundle_lightbox_text">
+            <h2><%= offer.merchant.offer.discount_rate %>% off for <%= offer.merchant.name %></h2>
+            <p>
+            Valid for <%= offer.merchant.offer.discount_rate %>% off <% if offer.merchant.offer.any_cap? %> any single purchase up to <%= offer.merchant.offer.offer_cap.format(:no_cents_if_whole => true) %>.
+            <% end %> <%= offer.merchant.offer.tagline %>.  <%= offer.merchant.offer.rules %>
+          </div>            
+          <div class="clear"></div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+
+
+    <div align="right" id="bundle_give">
+
+      <h2>&#133;when you give <span><%= @bundle.donation_value.format(:no_cents_if_whole => true) %></span> to:<br>
+        <b><%= @charity.name %></b></h2>
+      <br />
+      <div id=""><%= image_tag @charity.picture.url(:grid), :class => "bundle_lightbox_img_size" %></div>
+
+      <hr />
+
+      <%= form_for :deal, :url => charity_bundle_deals_path(@charity, @bundle), :remote => true do |f| %>
+        <%= submit_tag "Add all rewards to cart", :id => 'button' %>
+      <% end %>
+      <div class="clear"></div>
+
+    </div>
+    <div class="clear"></div>
+    <div id="bundle_lightbox_top"></div>
+  </div>
+</div>

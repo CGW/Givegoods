@@ -1,0 +1,55 @@
+
+<%= form_for campaign, :url => user_campaign_path, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= error_group_for(f) do %>
+    <strong>Heads up!</strong> Looks like there was a problem updating your donation page:
+  <% end %>
+
+  <fieldset>
+    <%= control_group_for(f, :name) do %>
+      <%= f.text_field :name, :placeholder => campaign.name, :tabindex => autotabindex, :disabled => true, :class =>'span4' %>
+    <% end %>
+
+    <%= control_group_for(f, :tagline) do %>
+      <%= f.text_area :tagline, :tabindex => autotabindex, :rows => 2, :class => 'input-block-level' %>
+    <% end %>
+  </fieldset>
+
+
+  <fieldset>
+    <legend>Donation amounts</legend>
+
+    <p><small>Add or update tiers below to provide a suggested amount to your donors.</small></p> 
+
+    <% campaign.tiers.each_with_index do |tier, index| %>
+      <%= f.fields_for(:tiers, tier) do |tier_form| %>
+        <%= control_group_for(tier_form, :amount, :label => "Tier ##{index+1}", :id => dom_id(tier)) do %>
+          <%= tier_form.text_field :amount, :tabindex => autotabindex, :class => "input-mini" %>
+          <%= tier_form.text_field :tagline, :tabindex => autotabindex, :placeholder => "What's the impact of a donation this size?", :class => "span4" %>
+          <label class="checkbox" style="margin-top: 6px;">Delete <%= tier_form.check_box :_destroy %></label>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= f.fields_for(:tiers, Tier.new) do |tier_form| %>
+      <div class="control-group" style="margin-bottom: 0px;">
+        <div class="controls">
+          <%= tier_form.label(:amount, "Add new tier:", :class => 'bold') %>
+        </div>
+      </div>
+      <%= control_group_for(tier_form, :amount, :label => "") do %>
+        <%= tier_form.text_field :amount, :tabindex => autotabindex, :class => "input-mini" %>
+        <%= tier_form.text_field :tagline, :tabindex => autotabindex, :placeholder => "What's the impact of a donation this size?", :class => "span4" %>
+      <% end %>
+    <% end %>
+  </fieldset>
+
+  <br />
+
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit 'Update', :class => 'btn btn-primary', :tabindex => autotabindex %>
+      <%= link_to 'Cancel', edit_user_campaign_path, :class => 'btn', :tabindex => autotabindex %>
+    </div>
+  </div>
+
+<% end %> 

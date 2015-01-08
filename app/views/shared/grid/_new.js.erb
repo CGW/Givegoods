@@ -1,0 +1,4 @@
+$("#lightbox").remove();
+$("body").append("<%=j render("shared/grid/lightbox").html_safe %>");
+$("#lightbox").show();
+$(document).trigger("lightbox-loaded");

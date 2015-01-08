@@ -1,0 +1,50 @@
+<%= javascript_include_tag '//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js' %>
+<style>
+  pre, iframe {
+    width: 100%;
+    border: 1px solid #eee;
+    margin: 0 0 10px;
+  }
+</style>
+
+<div>
+  <strong>Subject:</strong> <%= @mail.subject %>
+</div>
+
+<hr />
+
+<br />
+
+<% if @mail.multipart? %>
+
+  <% if @mail.text_part.present? %>
+    <div>
+      <strong>Text:</strong>
+    </div>
+<pre>
+<%= @mail.text_part.body %>
+</pre>
+
+    <br />
+  <% end %>
+
+  <% if @mail.html_part.present? %>
+    <div>
+      <strong>HTML:</strong>
+    </div>
+    <iframe id="html-preview" style="height: 80%;"></iframe>
+    <%= javascript_tag do %>
+      $(function() {
+        $('#html-preview').contents().find('html').html('<%= escape_javascript @mail.html_part.body.to_s.html_safe %>');
+      });
+    <% end %>
+  <% end %>
+<% else %>
+  <iframe id="html-preview" style="height: 80%;"></iframe>
+  <%= javascript_tag do %>
+    $(function() {
+      $('#html-preview').contents().find('html').html('<%= escape_javascript @mail.body.to_s.html_safe %>');
+    });
+  <% end %>
+<% end %>
+

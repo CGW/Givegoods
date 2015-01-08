@@ -1,0 +1,24 @@
+Thanks <%= @order.buyer.name %>!
+
+You have made the following charitable <%= "gift".pluralize(@charities.size) %>:
+<% @charities.each do |charity| %>
+<%= @order.charity_donation_total(charity) %> to <%= charity.name %>
+<% end %>
+
+<% if @certificates.present? %>
+About Your Tax Deductions and Rewards:
+Per federal law, you are entitled to received a tax-deduction for the entire amount of your donation, less any value you choose to redeem from merchant rewards below.
+
+You have received rewards from <%= @merchants.size > 1 ? "these" : "this" %> <%= "merchant".pluralize(@merchants.size) %>:
+
+<% @certificates.each do |certificate| %>
+  * <%= certificate.merchant.name %>: <%= print_certificate_url(certificate) %>
+<% end %>
+<% else %>
+About Your Tax Deductions:
+Per federal law, you are entitled to received a tax-deduction for the entire amount of your donation.
+<% end %>
+
+Sincerely,
+
+<%= render "shared/mailer/footer" %>

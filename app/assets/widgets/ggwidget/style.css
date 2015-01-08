@@ -1,0 +1,48 @@
+#MyWidget{
+	margin:0px;
+	font:Arial;
+	font-size:larger;
+	font-weight:bold;
+        padding: 10px; 
+	font-size:16px; 
+	font-family: Helvetica, Arial; 
+}
+
+a {
+  text-decoration: none;
+  } 
+
+.rounded { 
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  -khtml-border-radius:3px;
+}
+
+.button {
+  max-width: auto;
+  width: 90%;
+  color:#FFF;
+  font-weight:700;
+  margin-top: 10px;
+  font-size:16px;
+  padding: 10px;
+  background-color:#00A5D6;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  -khtml-border-radius:3px;
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.button:hover {
+  background-color:#00A5FF;
+  background:#0BF;
+}
+
+.merchant_name {
+font-size: 24px;
+letter-spacing: -1px;
+color: #00A5D6;
+line-height: 24px;
+}

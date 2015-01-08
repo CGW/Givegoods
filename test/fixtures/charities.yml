@@ -1,0 +1,63 @@
+save_the_redwoods_leage:
+  id: 1
+  name: Save The Redwoods League
+  slug: save-the-redwoods-league
+  lat: '37.79132900'
+  lng: '-122.40053800'
+  status: 'active'
+  created_at: '2012-01-17 16:15:01.682961'
+  updated_at: '2012-01-17 16:15:01.682961'
+  picture: save-the-redwoods.jpg
+  website_url: http://www.savetheredwoods.org
+  description: Save the Redwoods League protects and restores redwood forests and connects people with their peace and beauty so these wonders of the natural world flourish.
+
+california_state_parks_foundation:
+  id: 2
+  name: California State Parks Foundation
+  slug: california-state-parks-foundation
+  lat: '37.80603300'
+  lng: '-122.40611100'
+  status: 'active'
+  created_at: '2012-01-17 16:15:02.003855'
+  updated_at: '2012-01-17 16:15:04.512812'
+  picture: ca-state-parks.jpg
+  website_url: http://www.calparks.org
+  description:
+
+california_police_youth_foundation:
+  id: 3
+  name: California Police Youth Foundation
+  slug: california-police-youth-foundation
+  lat: '38.77680520'
+  lng: '-121.30662750'
+  status: 'active'
+  created_at: '2012-01-17 16:15:02.423575'
+  updated_at: '2012-01-17 16:15:04.893472'
+  picture: ca-police-youth.png
+  website_url: http://www.calpyc.com
+  description:
+
+alameda_food_bank:
+  id: 4
+  name: Alameda Food Bank
+  slug: alameda-food-bank
+  lat: '37.77818880'
+  lng: '-122.27430850'
+  status: 'active'
+  created_at: '2012-01-17 16:15:02.716494'
+  updated_at: '2012-01-17 16:15:02.716494'
+  picture: alameda-food-bank.jpg
+  website_url: http://www.alamedafoodbank.org/
+  description:
+
+boys_and_girls_of_alameda:
+  name: Boys and Girls of Alameda
+  slug: boys-and-girls-of-alameda
+  lat: 37.77961480
+  lng: -122.28785830
+  status: active
+  created_at: 2012-01-17 16:15:03.23682
+  updated_at: 2012-01-17 16:15:05.717713
+  picture: boys-and-girls-club.jpg
+  website_url: http://www.alamedabgc.org
+  description:

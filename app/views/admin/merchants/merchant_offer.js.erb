@@ -1,0 +1,10 @@
+$('#new_merchant_id').val("");
+$('#new_offer_text').val("");
+var already_there = false;
+$('input[name="bundle[offer_ids][]"]').each(function() {
+  if ( $(this).val() === "<%= resource.offer.id %>")
+    already_there = true;
+});
+if (!already_there) {
+  $('#offers_list').append("<%=j render('admin/bundles/offer', :offer => resource.offer) %>");
+}

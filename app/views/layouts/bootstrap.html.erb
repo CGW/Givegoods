@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title><%= page_title %></title>
+
+  <meta name="description" content="<%= t("site.meta_description") %>" />
+  <%= csrf_meta_tags %>
+
+  <%= yield :stylesheets %>
+  <%= yield :javascripts %>
+
+  <%= render 'layouts/google_analytics' %>
+  <%= render 'layouts/get_satisfaction' %>
+</head>
+
+<body>
+  <%= yield :body %>
+</body>
+
+</html>

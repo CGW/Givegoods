@@ -1,0 +1,183 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  activerecord:
+    attributes:
+      merchant_sidekick/addressable/address:
+        province_code: State
+        postal_code: Zip
+      billing_address:
+        postal_code: Billing Zip Code
+      user:
+        email: Email address
+        remember_me: Remember me?
+      charity:
+        name: Charity name
+        campaign_bundle_tagline: Bundle Tagline  
+        website_url: Website URL
+        email: Contact email
+        ein: EIN
+      merchant: 
+        website_url: Website URL
+      offer:
+        discount_rate: Reward discount
+        offer_cap: Reward value limit
+        max_certificates: Maximum rewards per month
+        tagline: Tagline
+        rules: Rules and conditions
+    errors:
+      models:
+        merchant_sidekick/addressable/address:
+          attributes:
+            province_code:
+              inclusion: "must be a valid state"
+        billing_address:
+          attributes:
+            street: 
+              blank: "Please fill in your street address" 
+            city:
+              blank: "Please fill in your city"
+            postal_code:
+              blank: "Please fill in your billing zip code"
+            province_code:
+              blank: "Please fill in your state"
+        charity:
+          attributes:
+            ein:
+              taken: "A charity with that EIN already exists"
+        credit_card:
+          attributes:
+            year:
+              expired: "The credit card entered has expired"
+        customer:
+          attributes:
+            first_name:
+              blank: "Please fill in your first name"
+            last_name:
+              blank: "Please fill in your last name"
+            email:
+              blank: "Please fill in your email address"
+        donation:
+          attributes:
+            amount: 
+              invalid: "Please specify a donation amount between %{min} and %{max}"
+        tier:
+          attributes:
+            amount_cents:
+              taken: "A tier with the amount you specified already exists" 
+        user:
+          attributes:
+            first_name:
+              blank: "Please fill in your first name"
+            last_name:
+              blank: "Please fill in your last name"
+            email:
+              blank: "Please fill in your email address"
+              taken: "A user with your email address already exists"
+              not_found: "A user with that email address could not be found"
+            password:
+              blank: "Please fill in a password"
+  errors: 
+    # default format for full_messages adds attribute and sucks with custom messaging; remove it
+    format: "%{message}"
+    messages:
+      # now add attribute name back for uncustomized messages
+      taken: "%{attribute} has already been taken"
+      inclusion: "%{attribute} is not included in the list"
+      exclusion: "%{attribute} is reserved"
+      invalid: "%{attribute} is invalid"
+      confirmation: "%{attribute} doesn't match confirmation"
+      accepted: "%{attribute} must be accepted"
+      empty: "%{attribute} can't be empty"
+      blank: "%{attribute} can't be blank"
+      too_long: "%{attribute} is too long (maximum is %{count} characters)"
+      too_short: "%{attribute} is too short (minimum is %{count} characters)"
+      wrong_length: "%{attribute} is the wrong length (should be %{count} characters)"
+      not_a_number: "%{attribute} is not a number"
+      not_an_integer: "%{attribute} must be an integer"
+      greater_than: "%{attribute} must be greater than %{count}"
+      greater_than_or_equal_to: "%{attribute} must be greater than or equal to %{count}"
+      equal_to: "%{attribute} must be equal to %{count}"
+      less_than: "%{attribute} must be less than %{count}"
+      less_than_or_equal_to: "%{attribute} must be less than or equal to %{count}"
+      odd: "%{attribute} must be odd"
+      even: "%{attribute} must be even"
+      # devise
+      expired: "%{attribute} has expired, please request a new one"
+      not_found: "%{attribute} not found"
+      already_confirmed: "%{attribute} was already confirmed, please try signing in"
+    attributes:
+      terms:
+        accepted: "You must accept the terms and conditions" 
+
+  site:
+    name: Givegoods
+    title: "Givegoods :: Get when you give"
+    meta_description: "Get rewards when you give to charities. Givegoods is the best way to support local causes and businesses at the same time."
+
+  pages:
+    index:
+      hero:
+        title: Incentive-based fundraising is here.
+        description:
+          one: Find great deals.
+          two: Attract new customers.
+          three: Fund important causes.
+        action: Get Started Now
+    start:
+      create_offer:
+        title: Create a Fundraising Offer
+        description: '"I want to offer my services, products, talents or assets to raise money for another organization."'
+        action: Create an Offer
+      create_campaign:
+        title: Run a Campaign Page
+        description: '"I am an organization, cause, event or 501c3 non-profit that wants to create a place where people can offer their goods and services in exchange for donations for my cause."'
+        action: Run a Campaign Page
+
+  offer:
+    value: "%s (Valid on purchases of %s or greater.)"
+    redemption_value: "Valid on purchases of %s or greater."
+    offer_value: "Donate %{donation_amount}, get %{credit_amount} store credit when you spend %{spending_amount} or more."
+
+  layouts:
+    application:
+      topbar:
+        brand: GiveGoods
+      footer:
+        company: "Givegoods.org, a 501(c)3 organization"
+        faq: FAQ
+        faq_title: Frequently Asked Questions
+        signup: "Sign up"
+
+  active_admin:
+    register: Register
+    activate: Activate
+    deactivate: Deactivate
+    redeem: Redeem
+    unredeem: Unredeem
+    suspend: Suspend
+    unsuspend: Unsuspend
+
+  devise:
+    mailer:
+      confirmation_instructions:
+        subject: 'Givegoods: Confirmation instructions'
+      reset_password_instructions:
+        subject: 'Givegoods: Password reset instructions'
+
+  admin_mailer:
+    new_charity:
+      subject: A new charity has been created 
+    activated_charity:
+      subject: 'A charity has been activated'
+    active:
+      subject: New merchant account notice
+  charity_mailer:
+    activated_charity:
+      subject: 'Givegoods: Your charity has been activated'
+  merchant_mailer:
+    pending:
+      subject: Your merchant account is pending
+    active:
+      subject: Your merchant account is active

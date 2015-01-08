@@ -1,0 +1,23 @@
+<div id="header-outer">
+  <div id="header-inner">
+    <div class="row">
+      <div class="span4">
+        <a href="/"><%= image_tag 'givegoods.png', :class => 'logo-image' %></a>
+      </div>
+  
+      <div class="header-inner-nav span6 pull-right">
+        <% if user_signed_in? %>
+          <a href="<%= destroy_user_session_path %>"><div class="nav-item">Log out</div></a>
+          <a href="<%= edit_user_registration_path %>"><div class="nav-item">My Account</div></a>
+        <% else %>
+          <%= link_to "Sign-in", new_user_session_path, :class => "nav-item"  %>
+          <%= link_to "Join", page_path('join'), :class => "nav-item"  %>
+        <% end %>
+    
+        <%= link_to "About", page_path('about'), :class => "nav-item"  %>
+        <a href="<%= charities_path %>"><div class="nav-item">Charities</div></a>
+        <a href="<%= merchants_path %>"><div class="nav-item">Rewards</div></a>
+      </div>
+    </div>
+  </div>
+</div>

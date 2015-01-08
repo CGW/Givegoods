@@ -1,0 +1,21 @@
+<div id="grid-info" class="grid-panel">
+  <%= render_if_present(charity.campaign) do %>
+    <div class="clearfix">
+      <a href="<%= charity_campaign_default_path(charity, charity.campaign.slug) %>" class="button">
+        I want to skip rewards &amp; donate now
+      </a>
+    </div>
+  <% end %>
+  <div class="grid-info-image">
+    <%= image_tag charity.picture.grid_info %>
+  </div>
+  <h4><%= charity.name %></h4>
+  <%= render_if_present(charity.description) do %>
+    <hr />
+    <%= simple_format(charity.description) %>
+  <% end %>
+  <%= render_if_present(charity.website_url) do %>
+    <hr />
+    <p>Visit our <%= link_to 'website', charity.website_url, "data-popup" => true %>.</p>
+  <% end %>
+</div>

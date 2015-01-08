@@ -1,0 +1,7 @@
+<%= @greeting %>,
+
+Your charity, <%= @charity.name %>, has been activated and is now live on the Givegoods. Not sure where to look? Check out your charity's home on our home here:
+<%= charity_landing_url(@charity) %>
+
+cheers,
+<%= render "shared/mailer/footer" %>
